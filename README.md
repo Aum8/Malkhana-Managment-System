@@ -17,5 +17,7 @@ D) Record details of person takin any item from the Malkhana with timestamp.
 
 
 
-UserId's are                aumhadiyal,aumthakkar,kevinhirole,vedantkahar
-passwords accordingly       2502        0803      0106        2603
+UserIds and Passwords              aumhadiyal=2502    aumthakkar=0803   kevinhirole=0106   vedantkahar=2603
+
+modify the Insert Function parameters as per wish 
+                          
