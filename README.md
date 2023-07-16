@@ -14,3 +14,8 @@ C) And a separate record of items sent for FSL and receipt of their report and i
 submission in the Court.
 
 D) Record details of person takin any item from the Malkhana with timestamp.
+
+
+
+UserId's are                aumhadiyal,aumthakkar,kevinhirole,vedantkahar
+passwords accordingly       2502        0803      0106        2603
