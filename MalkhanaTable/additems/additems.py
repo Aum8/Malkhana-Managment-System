@@ -77,7 +77,7 @@ def insert_data():
     # Commit the changes and close the connection
     conn.commit()
     conn.close()
-
+#
 
 def go_back():
     root.withdraw()
