@@ -47,9 +47,9 @@ def additems():
     root.mainloop()
 
 def go_back():
-    root.withdraw()
+    root.destroy()
     m.mkpage()
 
-def go_home():
-    root.withdraw()
+def go_home(hp):
+    root.destroy()
     Homepage.open_homepage()
