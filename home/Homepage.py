@@ -16,5 +16,6 @@ def open_homepage():
 def clicked():
     hp.withdraw()
     mk.mkpage()
+    #....
 
 
