@@ -1,4 +1,5 @@
 import tkinter as tk
+import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
 
 def mkpage():
@@ -14,7 +15,7 @@ def mkpage():
     back_button = tk.Button(root, text="Back", command=go_back)
     back_button.place(x=root.winfo_screenwidth() - 200, y=10, width=80, height=30)
     
-    add_button = tk.Button(root, text="Add Items")
+    add_button = tk.Button(root, text="Add Items",command=additemsclicked)
     add_button.pack()
     add_button.pack(pady=20)
 
@@ -43,3 +44,7 @@ def go_back():
 def go_home():
     root.withdraw()
     Homepage.open_homepage()
+
+def additemsclicked():
+    root.withdraw()
+    a.additems()
