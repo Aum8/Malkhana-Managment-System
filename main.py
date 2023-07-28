@@ -1,8 +1,4 @@
-# Import functions and modules from the subfolders
-import login.login as login
-import home.Homepage as Homepage
-import login.logindb as logindb
-
+import login.login as login 
 
 def main():
     # Call the login page function from login.py
@@ -10,4 +6,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
