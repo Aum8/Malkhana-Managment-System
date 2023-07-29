@@ -8,12 +8,8 @@ def mkpage(prev_homepage_frame):
     global malkhanapage_frame
     malkhanapage_frame = tk.Frame(prev_homepage_frame.master)
     malkhanapage_frame.pack()
-    home_button = tk.Button(malkhanapage_frame, text="Home", command=go_home)
-    home_button.pack(side=tk.RIGHT, anchor=tk.N, padx=10, pady=10)
-
-    back_button = tk.Button(malkhanapage_frame, text="Back", command=go_back)
-    back_button.pack(side=tk.RIGHT, anchor=tk.N, padx=10, pady=10)
-
+    
+    
     add_button = tk.Button(malkhanapage_frame, text="Add Items",command=additemsclicked)
     add_button.pack()
     add_button.pack(pady=20)
@@ -32,6 +28,15 @@ def mkpage(prev_homepage_frame):
     checkout_button = tk.Button(malkhanapage_frame, text="Check Out Items")
     checkout_button.pack()
     checkout_button.pack(pady=20)
+
+    home_button = tk.Button(malkhanapage_frame, text="Home", command=go_home)
+    home_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
+
+    back_button = tk.Button(malkhanapage_frame, text="Back", command=go_back)
+    back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
+
+
+    
 
     malkhanapage_frame.mainloop()
 

@@ -1,7 +1,7 @@
 import tkinter as tk
 import sqlite3
+from tkinter import messagebox
 from tkinter import ttk
-
 import home.Homepage as homepage
 import MalkhanaTable.MalkhanaPage as m
 
@@ -90,7 +90,12 @@ def viewitems(prev_malkhana_frame):
     search_entry = tk.Entry(viewitems_frame, textvariable=search_var)
     search_entry.pack(pady=5)
 
-    search_button = tk.Button(viewitems_frame, text="Search", command=lambda: search_items(tree, search_var.get()))
+    # Create a dropdown menu for selecting search field
+    search_field_var = tk.StringVar(value="Barcode")
+    search_field_menu = ttk.Combobox(viewitems_frame, textvariable=search_field_var, values=tree["columns"],state='readonly')
+    search_field_menu.pack()
+
+    search_button = tk.Button(viewitems_frame, text="Search", command=lambda: search_items(tree, search_field_var.get(), search_var.get()))
     search_button.pack()
 
     showall = tk.Button(viewitems_frame, text="Show All", command=lambda: show_all(tree))
@@ -121,31 +126,21 @@ def show_all(tree):
         # Display error message if there's an issue with the database
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
 
-    
-def search_items(tree, search_text):
+def search_items(tree, search_field, search_text):
     # Clear previous search results
     for item in tree.get_children():
         tree.delete(item)
 
+    search_field = search_field.lower().replace(" ", "_")
     # Add data to the treeview from the database based on the search criteria
     try:
         conn = sqlite3.connect('databases/items_in_malkhana.db')
         cursor = conn.cursor()
 
-        cursor.execute('''
+        cursor.execute(f'''
             SELECT * FROM items
-            WHERE barcode LIKE ? OR
-                  fir_number LIKE ? OR
-                  item_name LIKE ? OR
-                  ipc_section LIKE ? OR
-                  crime_scene LIKE ? OR
-                  crime_date LIKE ? OR
-                  crime_time LIKE ? OR
-                  crime_witnesses LIKE ? OR
-                  crime_inspector LIKE ?
-        ''', ('%'+search_text+'%', '%'+search_text+'%', '%'+search_text+'%', '%'+search_text+'%',
-              '%'+search_text+'%', '%'+search_text+'%', '%'+search_text+'%', '%'+search_text+'%',
-              '%'+search_text+'%'))
+            WHERE {search_field} LIKE ?
+        ''', ('%' + search_text + '%',))
 
         # Fetch the rows and insert them into the treeview
         for row in cursor.fetchall():
