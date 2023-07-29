@@ -4,34 +4,36 @@ import MalkhanaTable.MalkhanaPage as m
 import sqlite3
 import tkinter.messagebox as messagebox
 
-def additems():
-    global root
+def additems(prev_malkhana_frame):
+    prev_malkhana_frame.pack_forget()
+    global additems_frame
     global barcode_entry,fir_number_entry, item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_time_entry, crime_witnesses_entry, crime_inspector_entry
-    root = tk.Toplevel()
-    root.title("Add items")
-    root.state('zoomed')
+    global additems_frame
+    additems_frame = tk.Frame(prev_malkhana_frame.master)
+    additems_frame.master.title("Add items page")
+    additems_frame.pack()
 
     # Labels
-    tk.Label(root, text="Barcode No:").grid(row=0, column=0, padx=10, pady=10)
-    tk.Label(root, text="FIR No: ").grid(row=1,column=0,padx=10,pady=10)
-    tk.Label(root, text="Item Name:").grid(row=2, column=0, padx=10, pady=10)
-    tk.Label(root, text="IPC Section:").grid(row=3, column=0, padx=10, pady=10)
-    tk.Label(root, text="Crime Scene:").grid(row=4, column=0, padx=10, pady=10)
-    tk.Label(root, text="Crime Date:").grid(row=5, column=0, padx=10, pady=10)
-    tk.Label(root, text="Crime Time:").grid(row=6, column=0, padx=10, pady=10)
-    tk.Label(root, text="Crime Witnesses:").grid(row=7, column=0, padx=10, pady=10)
-    tk.Label(root, text="Crime Inspector:").grid(row=8, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Barcode No:").grid(row=0, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="FIR No: ").grid(row=1,column=0,padx=10,pady=10)
+    tk.Label(additems_frame, text="Item Name:").grid(row=2, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="IPC Section:").grid(row=3, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Crime Scene:").grid(row=4, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Crime Date:").grid(row=5, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Crime Time:").grid(row=6, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Crime Witnesses:").grid(row=7, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="Crime Inspector:").grid(row=8, column=0, padx=10, pady=10)
 
     # Entry Fields
-    barcode_entry = tk.Entry(root)
-    fir_number_entry = tk.Entry(root)
-    item_name_entry = tk.Entry(root)
-    ipc_section_entry = tk.Entry(root)
-    crime_scene_entry = tk.Entry(root)
-    crime_date_entry = tk.Entry(root)
-    crime_time_entry = tk.Entry(root)
-    crime_witnesses_entry = tk.Entry(root)
-    crime_inspector_entry = tk.Entry(root)
+    barcode_entry = tk.Entry(additems_frame)
+    fir_number_entry = tk.Entry(additems_frame)
+    item_name_entry = tk.Entry(additems_frame)
+    ipc_section_entry = tk.Entry(additems_frame)
+    crime_scene_entry = tk.Entry(additems_frame)
+    crime_date_entry = tk.Entry(additems_frame)
+    crime_time_entry = tk.Entry(additems_frame)
+    crime_witnesses_entry = tk.Entry(additems_frame)
+    crime_inspector_entry = tk.Entry(additems_frame)
 
     # Place Entry Fields
     barcode_entry.grid(row=0, column=1, padx=10, pady=10)
@@ -44,18 +46,20 @@ def additems():
     crime_witnesses_entry.grid(row=7, column=1, padx=10, pady=10)
     crime_inspector_entry.grid(row=8, column=1, padx=10, pady=10)
 
-    home_button = tk.Button(root, text="Home", command=go_home)
-    home_button.place(x=root.winfo_screenwidth() - 100, y=10, width=80, height=30)
-
-
-    back_button = tk.Button(root, text="Back", command=go_back)
-    back_button.place(x=root.winfo_screenwidth() - 200, y=10, width=80, height=30)
-
-    add_item_button = tk.Button(root, text="Add Item", command=insert_data)
+    
+    add_item_button = tk.Button(additems_frame, text="Add Item", command=insert_data)
     add_item_button.grid(row=9, column=0, columnspan=4, padx=10, pady=10)
 
-    root.mainloop()
-    return root, barcode_entry,fir_number_entry ,item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_time_entry, crime_witnesses_entry, crime_inspector_entry
+    back_button = tk.Button(additems_frame, text="Back",command=go_back)
+    back_button.grid(row=10, column=0,columnspan=4,  padx=10, pady=10)
+
+    home_button = tk.Button(additems_frame, text="Home",command=go_home)
+    home_button.grid(row=11, column=0,columnspan=4,  padx=10, pady=10)
+
+    
+
+    additems_frame.mainloop()
+    return additems_frame, barcode_entry,fir_number_entry ,item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_time_entry, crime_witnesses_entry, crime_inspector_entry
 
 def insert_data():
     # Retrieve data from the entry fields
@@ -119,9 +123,9 @@ def insert_data():
         messagebox.showerror("Error", f"Error occurred: {str(e)}")
 
 def go_back():
-    root.destroy()
-    m.mkpage()
+    additems_frame.pack_forget()
+    m.mkpage(additems_frame)
 
-def go_home(hp):
-    root.destroy()
-    Homepage.open_homepage()
+def go_home():
+    additems_frame.pack_forget()
+    Homepage.open_homepage_r(additems_frame)

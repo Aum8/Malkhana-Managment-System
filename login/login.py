@@ -7,21 +7,23 @@ root = None
 login_frame = None
 entry_username = None
 entry_password = None
+login_success_shown = False  # Flag to track if the login success message has been shown
 
 def check_login():
-    global entry_username, entry_password, login_frame
+    global entry_username, entry_password, login_frame, login_success_shown
     username = entry_username.get()
     password = entry_password.get()
 
     if logindb.check_credentials(username, password):
-        messagebox.showinfo("Success", "Login successful!")
-        login_frame.pack_forget()  # Hide the login frame
+        if not login_success_shown:
+            messagebox.showinfo("Success", "Login successful!")
+            login_success_shown = True
         Homepage.open_homepage(login_frame)
     else:
         messagebox.showerror("Error", "Wrong username or password")
 
 def initloginpage():
-    global entry_username, entry_password, login_frame, root
+    global entry_username, entry_password, login_frame, root, login_success_shown
     root = tk.Tk()
     root.state('zoomed')
     root.title("Login Page")
