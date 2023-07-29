@@ -1,6 +1,7 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
+import MalkhanaTable.viewitems.viewitems as v
 
 def mkpage(prev_homepage_frame):
     prev_homepage_frame.pack_forget()
@@ -18,7 +19,7 @@ def mkpage(prev_homepage_frame):
     add_button.pack(pady=20)
 
 
-    view_button = tk.Button(malkhanapage_frame, text="View Items")
+    view_button = tk.Button(malkhanapage_frame, text="View Items",command=viewitemsclicked)
     view_button.pack()
     view_button.pack(pady=20)
 
@@ -47,3 +48,6 @@ def additemsclicked():
     malkhanapage_frame.pack_forget()
     a.additems(malkhanapage_frame)
 
+def viewitemsclicked():
+    malkhanapage_frame.pack_forget()
+    v.viewitems(malkhanapage_frame)
