@@ -1,5 +1,6 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
+import MalkhanaTable.checkin.checkinpage as ci
 import home.Homepage as Homepage
 import MalkhanaTable.viewitems.viewitems as v
 import login.login as login
@@ -12,6 +13,7 @@ def mkpage(prev_homepage_frame):
     global malkhanapage_frame
     malkhana_destroyer()
     malkhanapage_frame = tk.Frame(prev_homepage_frame.master)
+    malkhanapage_frame.master.title("Malkhana page")
     malkhanapage_frame.pack()
     
     
