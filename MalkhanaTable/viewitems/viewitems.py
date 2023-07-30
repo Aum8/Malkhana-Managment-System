@@ -4,6 +4,7 @@ from tkinter import messagebox
 from tkinter import ttk
 import home.Homepage as homepage
 import MalkhanaTable.MalkhanaPage as m
+import login.login as login
 
 def viewitems(prev_malkhana_frame):
     prev_malkhana_frame.pack_forget()
@@ -85,6 +86,8 @@ def viewitems(prev_malkhana_frame):
     back_button = tk.Button(viewitems_frame, text="Back", command=go_back)
     back_button.pack(pady=10)
 
+    logout = tk.Button(viewitems_frame, text="Logout", command= login.initloginpage)
+    logout.pack(padx=12, pady=10)
     # Create a search entry and button
     search_var = tk.StringVar()
     search_entry = tk.Entry(viewitems_frame, textvariable=search_var)

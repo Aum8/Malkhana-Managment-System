@@ -6,6 +6,7 @@ from tkcalendar import DateEntry  # Import the DateEntry widget
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
 import datetime
+import login.login as login
 
 def additems(prev_malkhana_frame):
     prev_malkhana_frame.pack_forget()
@@ -60,13 +61,14 @@ def additems(prev_malkhana_frame):
     add_item_button = tk.Button(additems_frame, text="Add Item", command=insert_data)
     add_item_button.grid(row=9, column=0, columnspan=4, padx=10, pady=10)
 
-    home_button = tk.Button(additems_frame, text="Home", command=go_home)
-    home_button.grid(row=0, column=20, padx=40, pady=10, sticky=tk.SE)
-
     back_button = tk.Button(additems_frame, text="Back", command=go_back)
-    back_button.grid(row=0, column=22, padx=42, pady=10, sticky=tk.SE)
+    back_button.grid(row=0, column=30, padx=42, pady=10, sticky=tk.SE)
 
+    home_button = tk.Button(additems_frame, text="Home", command= login.initloginpage)
+    home_button.grid(row=0, column=32, padx=40, pady=10, sticky=tk.SE)
 
+    logout = tk.Button(additems_frame, text="Logout", command= login.initloginpage)
+    logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
     
 

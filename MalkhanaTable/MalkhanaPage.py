@@ -1,7 +1,9 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
+import MalkhanaTable.checkin as ci
 import home.Homepage as Homepage
 import MalkhanaTable.viewitems.viewitems as v
+import login.login as login
 
 def mkpage(prev_homepage_frame):
     prev_homepage_frame.pack_forget()
@@ -20,7 +22,7 @@ def mkpage(prev_homepage_frame):
     view_button.pack(pady=20)
 
 
-    checkin_button = tk.Button(malkhanapage_frame, text="Check In Items")
+    checkin_button = tk.Button(malkhanapage_frame, text="Check In Items",command=checkin)
     checkin_button.pack()
     checkin_button.pack(pady=20)
 
@@ -29,8 +31,8 @@ def mkpage(prev_homepage_frame):
     checkout_button.pack()
     checkout_button.pack(pady=20)
 
-    home_button = tk.Button(malkhanapage_frame, text="Home", command=go_home)
-    home_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
+    logout = tk.Button(malkhanapage_frame, text="Logout", command= login.initloginpage)
+    logout.pack(side='right', anchor=tk.NE, padx=12, pady=10)
 
     back_button = tk.Button(malkhanapage_frame, text="Back", command=go_back)
     back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
@@ -54,5 +56,9 @@ def additemsclicked():
     a.additems(malkhanapage_frame)
 
 def viewitemsclicked():
+    malkhanapage_frame.pack_forget()
+    v.viewitems(malkhanapage_frame)
+
+def checkin():
     malkhanapage_frame.pack_forget()
     v.viewitems(malkhanapage_frame)
