@@ -61,4 +61,4 @@ def viewitemsclicked():
 
 def checkin():
     malkhanapage_frame.pack_forget()
-    v.viewitems(malkhanapage_frame)
+    ci.checkinPage(malkhanapage_frame)
