@@ -15,27 +15,23 @@ def mkpage(prev_homepage_frame):
     malkhanapage_frame.pack()
     
     
-    add_button = tk.Button(malkhanapage_frame, text="Add Items",command=additemsclicked)
+    add_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ઉમેરો", command=additemsclicked)
     add_button.pack()
     add_button.pack(pady=20)
 
-
-    view_button = tk.Button(malkhanapage_frame, text="View Items",command=viewitemsclicked)
+    view_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ જુઓ", command=viewitemsclicked)
     view_button.pack()
     view_button.pack(pady=20)
 
-    checkout_button = tk.Button(malkhanapage_frame, text="Check Out Items")
+    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઆઉટ કરો")
     checkout_button.pack()
     checkout_button.pack(pady=20)
 
-    logout = tk.Button(malkhanapage_frame, text="Logout", command=logoutclicked)
+    logout = tk.Button(malkhanapage_frame, text="લૉગઆઉટ", command=logoutclicked)
     logout.pack(side='right', anchor=tk.NE, padx=12, pady=10)
 
-    back_button = tk.Button(malkhanapage_frame, text="Back", command=go_back)
+    back_button = tk.Button(malkhanapage_frame, text="પાછા જાઓ", command=go_back)
     back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
-
-
-    
 
     malkhanapage_frame.mainloop()
 
@@ -62,5 +58,3 @@ def viewitemsclicked():
 def malkhana_destroyer():
     if malkhanapage_frame is not None:
         malkhanapage_frame.destroy()
-
-
