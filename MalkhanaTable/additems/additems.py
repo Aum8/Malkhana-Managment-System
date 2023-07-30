@@ -65,10 +65,10 @@ def additems(prev_malkhana_frame):
     back_button = tk.Button(additems_frame, text="Back", command=go_back)
     back_button.grid(row=0, column=30, padx=42, pady=10, sticky=tk.SE)
 
-    home_button = tk.Button(additems_frame, text="Home", command=logoutclicked)
+    home_button = tk.Button(additems_frame, text="Home", command=go_home)
     home_button.grid(row=0, column=32, padx=40, pady=10, sticky=tk.SE)
 
-    logout = tk.Button(additems_frame, text="Logout", command= logout_clicked)
+    logout = tk.Button(additems_frame, text="Logout", command= logoutclicked)
     logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
     
