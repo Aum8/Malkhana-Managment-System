@@ -35,7 +35,7 @@ def open_homepage_r(return_frame):
     homepage_frame = tk.Frame(return_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="FSL Table", command=fsl)
+    FSL_button = tk.Button(homepage_frame, text="FSL Log", command=fsl)
     FSL_button.grid(row=1, column=0, pady=10)
     
     logout = tk.Button(homepage_frame, text="Logout", command=logoutclicked)

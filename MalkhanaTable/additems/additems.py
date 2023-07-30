@@ -2,12 +2,10 @@ import tkinter as tk
 import sqlite3
 from tkinter import messagebox
 from tkinter import ttk
-from tkcalendar import DateEntry  # Import the DateEntry widget
+from tkcalendar import DateEntry  
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
-import datetime
 import login.login as login
-import main
 additems_frame = None
 def additems(prev_malkhana_frame):
     prev_malkhana_frame.destroy()
