@@ -4,10 +4,11 @@ import MalkhanaTable.checkin.checkinFromCourt as c
 import MalkhanaTable.checkin.checkinFromFSL as ci
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
-
+CI_frame = None
 def CIpage(prev_homepage_frame):
-    prev_homepage_frame.pack_forget()
+    prev_homepage_frame.destroy()
     global CI_frame
+    checkin_page_destroyer()
     CI_frame = tk.Frame(prev_homepage_frame.master)
     CI_frame.master.title("Check in")
     CI_frame.pack()
@@ -34,18 +35,22 @@ def CIpage(prev_homepage_frame):
     CI_frame.mainloop()
 
 def go_back():
-    CI_frame.pack_forget()
+    checkin_page_destroyer()
     m.mkpage(CI_frame)
     
 
 def go_home():
-    CI_frame.pack_forget()
+    checkin_page_destroyer()
     Homepage.open_homepage_r(CI_frame)
 
 def fsl():
-    CI_frame.pack_forget()
+    checkin_page_destroyer()
     f.checkin_page(CI_frame)
 
 def court():
-    CI_frame.pack_forget()
+    checkin_page_destroyer()
     c.checkin_page_2(CI_frame)
+
+def checkin_page_destroyer():
+    if CI_frame is not None:
+        CI_frame.destroy()

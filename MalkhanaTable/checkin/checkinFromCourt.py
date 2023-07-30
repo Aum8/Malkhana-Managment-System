@@ -4,7 +4,7 @@ import home.Homepage as Homepage
 import MalkhanaTable.checkin.checkinpage as cp
 from tkinter import ttk
 from tkcalendar import DateEntry
-
+checkin_frame=None
 def checkin():
     barcode_no = entry_barcode_no.get()
     checkin_time = f"{hour_var.get()}:{minute_var.get()}"
@@ -66,9 +66,13 @@ def checkin_page_2(root):
     back_button.grid(row=5, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_home():
-    checkin_frame.pack_forget()
+    checkin_destroyer()
     Homepage.open_homepage_r(checkin_frame)
 
 def go_back():
-    checkin_frame.pack_forget()
+    checkin_destroyer()
     cp.CIpage(checkin_frame)
+
+def checkin_destroyer():
+    if checkin_frame is not None:
+        checkin_frame.destroy()

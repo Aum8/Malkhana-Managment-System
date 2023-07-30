@@ -25,7 +25,7 @@ def mkpage(prev_homepage_frame):
     view_button.pack()
     view_button.pack(pady=20)
 
-    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઆઉટ કરો")
+    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઇન કરો",command=checkinclicked)
     checkout_button.pack()
     checkout_button.pack(pady=20)
 
@@ -53,6 +53,9 @@ def additemsclicked():
     malkhana_destroyer()
     a.additems(malkhanapage_frame)
 
+def checkinclicked():
+    malkhana_destroyer()
+    ci.CIpage(malkhanapage_frame)
 def viewitemsclicked():
     malkhana_destroyer()
     v.viewitems(malkhanapage_frame)
