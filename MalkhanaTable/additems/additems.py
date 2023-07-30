@@ -2,18 +2,17 @@ import tkinter as tk
 import sqlite3
 from tkinter import messagebox
 from tkinter import ttk
-from tkcalendar import DateEntry  # Import the DateEntry widget
+from tkcalendar import DateEntry  
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
-import datetime
 import login.login as login
-
+additems_frame = None
 def additems(prev_malkhana_frame):
-    prev_malkhana_frame.pack_forget()
+    prev_malkhana_frame.destroy()
+
     global additems_frame
-    global barcode_entry, fir_number_entry, item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry,crime_witnesses_entry, crime_inspector_entry
-    global additems_frame
-    global hour_var,minute_var
+    global barcode_entry, fir_number_entry, item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry,hour_var,minute_var,crime_witnesses_entry, crime_inspector_entry
+    additems_destroyer()
     additems_frame = tk.Frame(prev_malkhana_frame.master)
     additems_frame.master.title("Add items page")
     additems_frame.pack()
@@ -64,17 +63,15 @@ def additems(prev_malkhana_frame):
     back_button = tk.Button(additems_frame, text="Back", command=go_back)
     back_button.grid(row=0, column=30, padx=42, pady=10, sticky=tk.SE)
 
-    home_button = tk.Button(additems_frame, text="Home", command= login.initloginpage)
+    home_button = tk.Button(additems_frame, text="Home", command=go_home)
     home_button.grid(row=0, column=32, padx=40, pady=10, sticky=tk.SE)
 
-    logout = tk.Button(additems_frame, text="Logout", command= login.initloginpage)
+    logout = tk.Button(additems_frame, text="Logout", command= logoutclicked)
     logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
     
-
     additems_frame.mainloop()
-    return additems_frame, barcode_entry, fir_number_entry, item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, hour_var, minute_var, crime_witnesses_entry, crime_inspector_entry
-
+    
 def insert_data():
     
     global barcode_entry,fir_number_entry,item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_witnesses_entry, crime_inspector_entry
@@ -132,17 +129,23 @@ def insert_data():
         crime_witnesses_entry.delete(0, tk.END)
         crime_inspector_entry.delete(0, tk.END)
 
-        # Display success message
         messagebox.showinfo("Success", "Item added successfully!")
 
     except Exception as e:
-        # Display error message
         messagebox.showerror("Error", f"Error occurred: {str(e)}")
 
 def go_back():
-    additems_frame.pack_forget()
+    additems_destroyer()
     m.mkpage(additems_frame)
 
 def go_home():
-    additems_frame.pack_forget()
+    additems_destroyer()
     Homepage.open_homepage_r(additems_frame)
+
+def logoutclicked():
+    additems_destroyer()
+    login.initloginpage()
+
+def additems_destroyer():
+    if additems_frame is not None:
+        additems_frame.destroy()

@@ -3,35 +3,33 @@ from tkinter import messagebox
 import login.logindb as logindb
 import home.Homepage as Homepage
 
-root = None
-login_frame = None
-entry_username = None
 entry_password = None
-login_success_shown = False  # Flag to track if the login success message has been shown
+entry_username = None
+login_frame = None
+
 
 def check_login():
-    global entry_username, entry_password, login_frame, login_success_shown
+    global login_frame 
     username = entry_username.get()
     password = entry_password.get()
 
-
     if logindb.check_credentials(username, password):
-        if not login_success_shown:
-            messagebox.showinfo("Success", "Login successful!")
-            login_success_shown = True
+        messagebox.showinfo("Success", "Login successful!")
         Homepage.open_homepage(login_frame)
     else:
         messagebox.showerror("Error", "Wrong username or password")
 
-def initloginpage():
-    global entry_username, entry_password, login_frame, root, login_success_shown
-    root = tk.Tk()
-    root.state('zoomed')
-    root.title("Login Page")
+def initloginpage(prev_main_frame):
+    prev_main_frame.destroy()
+    global entry_username, entry_password, login_frame
 
+    login_destroyer()
+
+    login_frame = tk.Frame(prev_main_frame.master)
+    login_frame.pack()
+
+    login_frame.master.title("Login page")
     logindb.initialize_db()
-
-    login_frame = tk.Frame(root)
 
     label_username = tk.Label(login_frame, text="User ID:")
     label_password = tk.Label(login_frame, text="Password:")
@@ -45,6 +43,7 @@ def initloginpage():
     entry_password.pack(pady=5)
     button_login.pack(pady=20)
 
-    login_frame.pack()  # Pack the login frame initially
 
-    root.mainloop()
+def login_destroyer():
+    if login_frame is not None:
+        login_frame.destroy()
