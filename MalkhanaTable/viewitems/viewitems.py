@@ -1,13 +1,14 @@
 import tkinter as tk
 import sqlite3
 from tkinter import messagebox
+import main
 from tkinter import ttk
 import home.Homepage as homepage
 import MalkhanaTable.MalkhanaPage as m
 import login.login as login
-
+viewitems_frame = None
 def viewitems(prev_malkhana_frame):
-    prev_malkhana_frame.pack_forget()
+    prev_malkhana_frame.destroy()
     global viewitems_frame
     viewitems_frame = tk.Frame(prev_malkhana_frame.master)
     viewitems_frame.master.title("View Items")
@@ -86,7 +87,7 @@ def viewitems(prev_malkhana_frame):
     back_button = tk.Button(viewitems_frame, text="Back", command=go_back)
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewitems_frame, text="Logout", command= login.initloginpage)
+    logout = tk.Button(viewitems_frame, text="Logout", command= logoutclicked)
     logout.pack(padx=12, pady=10)
     # Create a search entry and button
     search_var = tk.StringVar()
@@ -105,12 +106,16 @@ def viewitems(prev_malkhana_frame):
     showall.pack()
 
 def go_back():
-    viewitems_frame.pack_forget()
+    viewitems_destroyer()
     m.mkpage(viewitems_frame)
 
 def go_home():
-    viewitems_frame.pack_forget()
+    viewitems_destroyer()
     homepage.open_homepage_r(viewitems_frame)
+
+def logoutclicked():
+    viewitems_destroyer()
+    login.initloginpage()
 
 def show_all(tree):
     for item in tree.get_children():
@@ -156,3 +161,8 @@ def search_items(tree, search_field, search_text):
     except Exception as e:
         # Display error message if there's an issue with the database
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
+
+
+def viewitems_destroyer():
+    if viewitems_frame is not None:
+        viewitems_frame.destroy()
