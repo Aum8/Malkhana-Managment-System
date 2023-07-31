@@ -160,7 +160,7 @@ def go_home():
 
 def logoutclicked():
     additems_destroyer()
-    login.initloginpage()
+    login.initloginpage(additems_frame)
 
 def additems_destroyer():
     if additems_frame is not None:

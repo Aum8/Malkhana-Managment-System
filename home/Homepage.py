@@ -2,7 +2,6 @@ import tkinter as tk
 import login.login as login
 import MalkhanaTable.MalkhanaPage as mk
 import FSLTable.FSLpage as fp
-
 homepage_frame = None
 
 def open_homepage(prev_login_frame):
@@ -59,4 +58,4 @@ def clicked():
 
 def fsl():
     homepage_destroyer()
-    fp.fsl_page(homepage_frame)
+    fp.viewfsl(homepage_frame)

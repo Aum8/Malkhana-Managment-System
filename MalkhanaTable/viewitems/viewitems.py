@@ -18,6 +18,11 @@ def viewitems(prev_malkhana_frame):
 
     # Create a Treeview widget to display the data in a tabular format
     tree = ttk.Treeview(viewitems_frame)
+    x_scrollbar = ttk.Scrollbar(tree, orient=tk.HORIZONTAL, command=tree.xview)
+    y_scrollbar = ttk.Scrollbar(tree, orient=tk.VERTICAL, command=tree.yview)
+    
+    # Configure the treeview to use the scrollbars
+    tree.configure(xscrollcommand=x_scrollbar.set, yscrollcommand=y_scrollbar.set)
 
     # Define columns
     tree["columns"] = (
@@ -85,11 +90,11 @@ def viewitems(prev_malkhana_frame):
         # Display error message if there's an issue with the database
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
 
-    # Pack the treeview widget with a scrollbar
+    
+
     tree.pack(fill=tk.BOTH, expand=True)
-    scrollbar = tk.Scrollbar(viewitems_frame, orient=tk.VERTICAL, command=tree.yview)
-    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-    tree.configure(yscrollcommand=scrollbar.set)
+    x_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
+    y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Create a button to go back to the homepage
     back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back)
@@ -127,7 +132,7 @@ def go_home():
 
 def logoutclicked():
     viewitems_destroyer()
-    login.initloginpage()
+    login.initloginpage(viewitems_frame)
 
 def show_all(tree):
     for item in tree.get_children():
