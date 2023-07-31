@@ -118,6 +118,9 @@ def go_back():
     viewitems_destroyer()
     m.mkpage(viewitems_frame)
 
+def viewitems_destroyer():
+    if viewitems_frame is not None:
+        viewitems_frame.destroy()
 def go_home():
     viewitems_destroyer()
     homepage.open_homepage_r(viewitems_frame)
