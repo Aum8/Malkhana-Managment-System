@@ -1,5 +1,6 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
+import MalkhanaTable.checkout.checkoutpage as co
 import MalkhanaTable.checkin.checkinpage as ci
 import home.Homepage as Homepage
 import MalkhanaTable.viewitems.viewitems as v
@@ -25,7 +26,11 @@ def mkpage(prev_homepage_frame):
     view_button.pack()
     view_button.pack(pady=20)
 
-    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઇન કરો",command=checkinclicked)
+    checkin_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઇન કરો",command=checkinclicked)
+    checkin_button.pack()
+    checkin_button.pack(pady=20)
+
+    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકout કરો",command=checkoutclicked)
     checkout_button.pack()
     checkout_button.pack(pady=20)
 
@@ -56,6 +61,11 @@ def additemsclicked():
 def checkinclicked():
     malkhana_destroyer()
     ci.CIpage(malkhanapage_frame)
+
+def checkoutclicked():
+    malkhana_destroyer()
+    co.COpage(malkhanapage_frame)
+
 def viewitemsclicked():
     malkhana_destroyer()
     v.viewitems(malkhanapage_frame)
