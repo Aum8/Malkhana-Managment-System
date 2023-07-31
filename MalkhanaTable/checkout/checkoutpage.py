@@ -1,6 +1,7 @@
 import tkinter as tk
 import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutCourt as c
+import MalkhanaTable.checkout.checkoutFSL as f
 import MalkhanaTable.MalkhanaPage as m
 CO_frame = None
 def COpage(prev_homepage_frame):
@@ -12,9 +13,9 @@ def COpage(prev_homepage_frame):
     CO_frame.pack()
     
     
-    # checkoutFSL = tk.Button(CO_frame, text="Check out to FSL",command=fsl)
-    # checkoutFSL.pack()
-    # checkoutFSL.pack(pady=20)
+    checkoutFSL = tk.Button(CO_frame, text="Check out to FSL",command=fsl)
+    checkoutFSL.pack()
+    checkoutFSL.pack(pady=20)
 
 
     checkoutCourt = tk.Button(CO_frame, text="Check out to Court",command=court)
@@ -41,9 +42,9 @@ def go_home():
     checkout_page_destroyer()
     Homepage.open_homepage_r(CO_frame)
 
-# def fsl():
-#     checkout_page_destroyer()
-#     f.checkout_page(CO_frame)
+def fsl():
+    checkout_page_destroyer()
+    f.checkouttoFSL_page(CO_frame)
 
 def court():
     checkout_page_destroyer()
