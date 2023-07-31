@@ -168,7 +168,6 @@ def search_items(tree, search_field, search_text):
         # Commit the changes
         conn.commit()
         conn.close()
-
     except Exception as e:
         # Display error message if there's an issue with the database
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
