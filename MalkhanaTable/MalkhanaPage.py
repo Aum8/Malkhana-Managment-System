@@ -1,14 +1,19 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
-import MalkhanaTable.checkin.checkinFromFSL as ci
+import MalkhanaTable.checkin.checkinpage as ci
 import home.Homepage as Homepage
 import MalkhanaTable.viewitems.viewitems as v
 import login.login as login
 
+malkhanapage_frame = None
+
 def mkpage(prev_homepage_frame):
-    prev_homepage_frame.pack_forget()
+    prev_homepage_frame.destroy()
+
     global malkhanapage_frame
+    malkhana_destroyer()
     malkhanapage_frame = tk.Frame(prev_homepage_frame.master)
+    malkhanapage_frame.master.title("Malkhana page")
     malkhanapage_frame.pack()
     
     
@@ -33,26 +38,30 @@ def mkpage(prev_homepage_frame):
     malkhanapage_frame.mainloop()
 
 def go_back():
-    malkhanapage_frame.pack_forget()
+    malkhana_destroyer()
     Homepage.open_homepage_r(malkhanapage_frame)
     
+def logoutclicked():
+    malkhana_destroyer()
+    login.initloginpage(malkhanapage_frame)
 
 def go_home():
-    malkhanapage_frame.pack_forget()
+    malkhana_destroyer()
     Homepage.open_homepage_r(malkhanapage_frame)
 
 def additemsclicked():
-    malkhanapage_frame.pack_forget()
+    malkhana_destroyer()
     a.additems(malkhanapage_frame)
 
 def checkinclicked():
     malkhana_destroyer()
     ci.CIpage(malkhanapage_frame)
-
 def viewitemsclicked():
-    malkhanapage_frame.pack_forget()
+    malkhana_destroyer()
     v.viewitems(malkhanapage_frame)
 
 def malkhana_destroyer():
     if malkhanapage_frame is not None:
         malkhanapage_frame.destroy()
+
+#s
