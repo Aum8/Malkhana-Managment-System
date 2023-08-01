@@ -2,7 +2,8 @@ import tkinter as tk
 import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
 import MalkhanaTable.checkin.checkinpage as cp
-import log
+import Log.log as log
+from tkinter import messagebox
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
@@ -21,14 +22,8 @@ def checkin():
     examiner = entry_examiner.get()
     examiner_report = text_examiner_report.get("1.0", "end-1c")
     
-    update_item_status(barcode_no)
-    log.update_logs(barcode_no, "Checked in From FSL", checkin_date, checkin_time)
+    barcode_checker(barcode_no,checkin_date,checkin_time)
     
-    entry_barcode_no.delete(0, tk.END)
-    entry_examiner.delete(0, tk.END)
-    #entry_checkin_date.set_date("")  # Clear the date entry
-    entry_checkin_date.set_date(None)
-    text_examiner_report.delete("1.0",tk.END)
 
 def checkin_page(prev_checkin_page):
     global fsl_checkin_frame, entry_barcode_no, entry_checkin_date, hour_var, minute_var, text_examiner_report,entry_examiner
@@ -97,3 +92,43 @@ def go_back():
 def fsL_checkin_destroyer():
     if fsl_checkin_frame is not None:
         fsl_checkin_frame.destroy()
+
+
+def barcode_checker(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchall()
+    conn.close()
+
+    if not result:
+        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        # Clear the input fields after showing the error
+        entry_barcode_no.delete(0, tk.END)
+        entry_examiner.delete(0, tk.END)
+        entry_checkin_date.set_date(None)
+        text_examiner_report.delete("1.0",tk.END)
+        return
+    already_inornot(barcode,date,time)
+    # Clear the input fields after successful checkout
+    entry_barcode_no.delete(0, tk.END)
+    entry_examiner.delete(0, tk.END)
+    entry_checkin_date.set_date(None)
+    text_examiner_report.delete("1.0",tk.END)
+
+def already_inornot(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT item_status FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchone()
+    conn.close()
+    if result and result[0] in ("fsl", "FSL"):
+        update_item_status(barcode)
+        log.update_logs(barcode, "Checked in from FSL", date, time)
+        messagebox.showinfo("Success", "Item recieved from FSL successfully!")
+    else:
+        messagebox.showerror("Item already available", "The item is already there in Malkhana.")
+        entry_barcode_no.delete(0, tk.END)
+        entry_examiner.delete(0, tk.END)
+        entry_checkin_date.set_date(None)
+        text_examiner_report.delete("1.0",tk.END)

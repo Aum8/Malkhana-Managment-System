@@ -1,11 +1,12 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
-import log
+import Log.log as log
 import MalkhanaTable.checkin.checkinpage as cp
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
+from tkinter import messagebox
 checkin_frame=None
 def update_item_status(barcode):
     con = sqlite3.connect('databases/items_in_malkhana.db')
@@ -20,8 +21,7 @@ def checkin():
     checkin_date = entry_checkin_date.get_date()
     order_details = text_order_details.get("1.0", "end-1c")
 
-    update_item_status(barcode_no)
-    log.update_logs(barcode_no, "Checked in From Court", checkin_date, checkin_time)
+    barcode_checker(barcode_no,checkin_date,checkin_time)
 
     # Clear the input fields after check-in
     entry_barcode_no.delete(0, tk.END)
@@ -88,3 +88,38 @@ def go_back():
 def checkin_destroyer():
     if checkin_frame is not None:
         checkin_frame.destroy()
+
+def barcode_checker(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchall()
+    conn.close()
+
+    if not result:
+        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        entry_barcode_no.delete(0, tk.END)
+        entry_checkin_date.set_date(None)  # Clear the date entry
+        text_order_details.delete("1.0", tk.END)
+        return
+    already_inornot(barcode,date,time)
+    # Clear the input fields after successful checkout
+    entry_barcode_no.delete(0, tk.END)
+    entry_checkin_date.set_date(None)  # Clear the date entry
+    text_order_details.delete("1.0", tk.END)
+
+def already_inornot(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT item_status FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchone()
+    conn.close()
+    if result and result[0] in ("court", "Court"):
+        update_item_status(barcode)
+        log.update_logs(barcode, "Checked in from Court", date, time)
+        messagebox.showinfo("Success", "Item recieved from Court successfully!")
+    else:
+        messagebox.showerror("Item already available", "The item is already there in Malkhana.")
+        entry_barcode_no.delete(0, tk.END)
+        entry_checkin_date.set_date(None)  # Clear the date entry
+        text_order_details.delete("1.0", tk.END)

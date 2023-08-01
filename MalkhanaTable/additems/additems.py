@@ -6,6 +6,7 @@ from tkcalendar import DateEntry
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
 import login.login as login
+import datetime
 additems_frame = None
 def additems(prev_malkhana_frame):
     prev_malkhana_frame.destroy()
@@ -116,15 +117,16 @@ def insert_data():
                             crime_witnesses TEXT,
                             crime_inspector TEXT,
                             item_status TEXT,
-                            where_its_kept TEXT
+                            where_its_kept TEXT,
+                            timee TEXT
                         );''')
-
+        timee = datetime.datetime.now()
         # Execute the SQL command to insert data into the table
         cursor.execute('''INSERT INTO items (barcode,fir_number, item_name, ipc_section, 
                           crime_scene, crime_date, crime_time, crime_witnesses, 
-                          crime_inspector,item_status,where_its_kept) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?)''',
+                          crime_inspector,item_status,where_its_kept,timee) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?)''',
                        (barcode,fir_number, item_name, ipc_section, crime_scene, crime_date,
-                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept))
+                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept,timee))
         
         # Commit the changes
         conn.commit()

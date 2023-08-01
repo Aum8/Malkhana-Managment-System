@@ -2,7 +2,7 @@ import tkinter as tk
 import login.login as login
 import MalkhanaTable.MalkhanaPage as mk
 import FSLTable.FSLpage as fp
-import log as l
+import Log.log as l
 homepage_frame = None
 
 def open_homepage(prev_login_frame):

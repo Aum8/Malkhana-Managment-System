@@ -76,7 +76,7 @@ def viewitems(prev_malkhana_frame):
         cursor = conn.cursor()
 
         # Execute the SQL command to select all rows from the table
-        cursor.execute('''SELECT * FROM items''')
+        cursor.execute('''SELECT * FROM items ORDER BY timee DESC''')
 
         # Fetch all the rows and insert them into the treeview
         for row in cursor.fetchall():
@@ -140,7 +140,7 @@ def show_all(tree):
     try:
         conn = sqlite3.connect("databases/items_in_malkhana.db")
         cursor = conn.cursor()
-        cursor.execute('''SELECT * FROM items''')
+        cursor.execute('''SELECT * FROM items ORDER BY timee DESC''')
         for row in cursor.fetchall():
             tree.insert("", tk.END, values=row)
 
@@ -198,3 +198,4 @@ def convert_to_english(column_name_gujarati):
     }
 
     return gujarati_to_english.get(column_name_gujarati, column_name_gujarati)
+

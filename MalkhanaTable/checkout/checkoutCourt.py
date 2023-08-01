@@ -2,10 +2,11 @@ import tkinter as tk
 import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutpage as co
 import MalkhanaTable.MalkhanaPage as m
-import log
+import Log.log as log
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
+from tkinter import messagebox
 
 checkout_frame = None
 
@@ -28,8 +29,7 @@ def checkouttocourt():
     date = entry_checkout_date.get_date()
     time = f"{hour_var.get()}:{minute_var.get()}"
 
-    update_item_status(barcode)
-    log.update_logs(barcode, "Checked out to court", date, time)
+    barcode_checker(barcode,date,time)
 
     # Clear the input fields after checkout
     entry_barcode.delete(0, tk.END)
@@ -102,3 +102,48 @@ def go_back():
 def go_home():
     checkout_destroyer()
     Homepage.open_homepage_r(checkout_frame)
+
+
+
+def barcode_checker(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchall()
+    conn.close()
+
+    if not result:
+        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        # Clear the input fields after showing the error
+        entry_barcode.delete(0, tk.END)
+        entry_fir_no.delete(0, tk.END)
+        entry_item_name.delete(0, tk.END)
+        entry_taken_by_whom.delete(0, tk.END)
+        entry_checkout_date.set_date(None)  # Clear the date entry
+        return
+    already_outornot(barcode,date,time)
+    # Clear the input fields after successful checkout
+    entry_barcode.delete(0, tk.END)
+    entry_fir_no.delete(0, tk.END)
+    entry_item_name.delete(0, tk.END)
+    entry_taken_by_whom.delete(0, tk.END)
+    entry_checkout_date.set_date(None)  # Clear the date entry
+
+
+def already_outornot(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT item_status FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchone()
+    conn.close()
+    if result and result[0] in ("malkhana", "Malkhana"):
+        update_item_status(barcode)
+        log.update_logs(barcode, "Checked out to Court", date, time)
+        messagebox.showinfo("Success", "Item sent to Court successfully!")
+    else:
+        messagebox.showerror("Item not available", "The item is not available in Malkhana.")
+        entry_barcode.delete(0, tk.END)
+        entry_fir_no.delete(0, tk.END)
+        entry_item_name.delete(0, tk.END)
+        entry_taken_by_whom.delete(0, tk.END)
+        entry_checkout_date.set_date(None)  

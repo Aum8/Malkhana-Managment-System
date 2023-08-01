@@ -2,8 +2,9 @@ import tkinter as tk
 import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutpage as cof
 import MalkhanaTable.MalkhanaPage as m
-import log
+import Log.log as log
 from tkinter import ttk
+from tkinter import messagebox
 import sqlite3
 from tkcalendar import DateEntry
 
@@ -28,16 +29,7 @@ def checkouttoFSL():
     time = f"{hour_var.get()}:{minute_var.get()}"
     order_no = entry_order_no.get()
 
-    update_item_status(barcode)
-    log.update_logs(barcode, "Checked out to FSL", date, time)
-
-    # Clear the input fields after checkout
-    entry_barcode.delete(0, tk.END)
-    entry_fir_no.delete(0, tk.END)
-    entry_item_name.delete(0, tk.END)
-    entry_taken_by_whom.delete(0, tk.END)
-    entry_checkout_date.set_date(None)  # Clear the date entry
-    order_no.delete(0 , tk.END)
+    barcode_checker(barcode,date,time)
 
 def checkouttoFSL_page(root):
     root.destroy()
@@ -70,7 +62,6 @@ def checkouttoFSL_page(root):
     entry_item_name = ttk.Entry(checkout_frame)
     entry_taken_by_whom = ttk.Entry(checkout_frame)
     entry_order_no = ttk.Entry(checkout_frame)
-    entry_nature_of_case = ttk.Entry(checkout_frame)
     entry_barcode.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
     entry_fir_no.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
     entry_item_name.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
@@ -109,3 +100,48 @@ def go_back():
 def go_home():
     checkout_destroyer()
     Homepage.open_homepage_r(checkout_frame)
+
+def barcode_checker(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchall()
+    conn.close()
+
+    if not result:
+        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        # Clear the input fields after showing the error
+        entry_barcode.delete(0, tk.END)
+        entry_fir_no.delete(0, tk.END)
+        entry_item_name.delete(0, tk.END)
+        entry_taken_by_whom.delete(0, tk.END)
+        entry_checkout_date.set_date(None)  # Clear the date entry
+        entry_order_no.delete(0, tk.END)
+        return
+    already_outornot(barcode,date,time)
+    # Clear the input fields after successful checkout
+    entry_barcode.delete(0, tk.END)
+    entry_fir_no.delete(0, tk.END)
+    entry_item_name.delete(0, tk.END)
+    entry_taken_by_whom.delete(0, tk.END)
+    entry_checkout_date.set_date(None)  # Clear the date entry
+    entry_order_no.delete(0, tk.END)
+
+def already_outornot(barcode,date,time):
+    conn = sqlite3.connect("databases/items_in_malkhana.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT item_status FROM items WHERE barcode = ?", (barcode,))
+    result = cursor.fetchone()
+    conn.close()
+    if result and result[0] in ("malkhana", "Malkhana"):
+        update_item_status(barcode)
+        log.update_logs(barcode, "Checked out to FSL", date, time)
+        messagebox.showinfo("Success", "Item sent to FSL successfully!")
+    else:
+        messagebox.showerror("Item not available", "The item is not available in Malkhana.")
+        entry_barcode.delete(0, tk.END)
+        entry_fir_no.delete(0, tk.END)
+        entry_item_name.delete(0, tk.END)
+        entry_taken_by_whom.delete(0, tk.END)
+        entry_checkout_date.set_date(None)  
+        entry_order_no.delete(0, tk.END)

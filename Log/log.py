@@ -8,7 +8,7 @@ from datetime import datetime, date
 CL_frame = None
 
 def update_logs(barcode, status, date, time):
-    conn = sqlite3.connect('logs.db')
+    conn = sqlite3.connect('databases/logs.db')
     cursor = conn.cursor()
     # Create the 'logs' table if it doesn't exist
     cursor.execute('''CREATE TABLE IF NOT EXISTS logs (
@@ -26,7 +26,7 @@ def update_logs(barcode, status, date, time):
 
 def search_logs(search_barcode):
     # Fetch logs data from the SQLite database based on the search barcode
-    conn = sqlite3.connect('logs.db')
+    conn = sqlite3.connect('databases/logs.db')
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM logs WHERE Barcode=?", (search_barcode,))
