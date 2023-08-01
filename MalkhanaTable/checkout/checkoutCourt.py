@@ -15,7 +15,7 @@ def checkout_destroyer():
 def update_item_status(barcode):
     con = sqlite3.connect('databases/items_in_malkhana.db')
     cursor = con.cursor()
-    cursor.execute("UPDATE items SET item_status='malkhana' where barcode = ?",(barcode,))
+    cursor.execute("UPDATE items SET item_status='court' where barcode = ?",(barcode,))
     con.commit()
     con.close()
 
