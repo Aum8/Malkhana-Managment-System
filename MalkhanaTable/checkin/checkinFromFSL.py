@@ -2,6 +2,7 @@ import tkinter as tk
 import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
 import MalkhanaTable.checkin.checkinpage as cp
+import log
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
@@ -21,6 +22,7 @@ def checkin():
     examiner_report = text_examiner_report.get("1.0", "end-1c")
     
     update_item_status(barcode_no)
+    log.update_logs(barcode_no, "Checked in From FSL", checkin_date, checkin_time)
     
     entry_barcode_no.delete(0, tk.END)
     entry_examiner.delete(0, tk.END)

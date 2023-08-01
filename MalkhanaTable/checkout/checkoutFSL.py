@@ -2,6 +2,7 @@ import tkinter as tk
 import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutpage as cof
 import MalkhanaTable.MalkhanaPage as m
+import log
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
@@ -18,8 +19,7 @@ def checkout_destroyer():
     if checkout_frame is not None:
         checkout_frame.destroy()
 
-def checkouttoFSL(root):
-    root.destroy()
+def checkouttoFSL():
     barcode = entry_barcode.get()
     fir_no = entry_fir_no.get()
     item_name = entry_item_name.get()
@@ -28,14 +28,15 @@ def checkouttoFSL(root):
     time = f"{hour_var.get()}:{minute_var.get()}"
     order_no = entry_order_no.get()
 
-    update_item_status(entry_barcode)
+    update_item_status(barcode)
+    log.update_logs(barcode, "Checked out to FSL", date, time)
 
     # Clear the input fields after checkout
     entry_barcode.delete(0, tk.END)
     entry_fir_no.delete(0, tk.END)
     entry_item_name.delete(0, tk.END)
     entry_taken_by_whom.delete(0, tk.END)
-    entry_checkout_date.set_date("")  # Clear the date entry
+    entry_checkout_date.set_date(None)  # Clear the date entry
     order_no.delete(0 , tk.END)
 
 def checkouttoFSL_page(root):

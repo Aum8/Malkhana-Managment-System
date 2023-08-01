@@ -1,6 +1,7 @@
 import tkinter as tk
 import MalkhanaTable.additems.additems as a
 import home.Homepage as Homepage
+import log
 import MalkhanaTable.checkin.checkinpage as cp
 from tkinter import ttk
 import sqlite3
@@ -19,11 +20,12 @@ def checkin():
     checkin_date = entry_checkin_date.get_date()
     order_details = text_order_details.get("1.0", "end-1c")
 
-    update_item_status(entry_barcode_no)
+    update_item_status(barcode_no)
+    log.update_logs(barcode_no, "Checked in From Court", checkin_date, checkin_time)
 
     # Clear the input fields after check-in
     entry_barcode_no.delete(0, tk.END)
-    entry_checkin_date.set_date("")  # Clear the date entry
+    entry_checkin_date.set_date(None)  # Clear the date entry
     text_order_details.delete("1.0", tk.END)
 
 def checkin_page_2(root):
