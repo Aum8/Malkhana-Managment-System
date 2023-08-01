@@ -2,17 +2,24 @@ import tkinter as tk
 import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutpage as cof
 import MalkhanaTable.MalkhanaPage as m
+import log
 from tkinter import ttk
+import sqlite3
 from tkcalendar import DateEntry
 
 checkout_frame = None
+def update_item_status(barcode):
+    con = sqlite3.connect('databases/items_in_malkhana.db')
+    cursor = con.cursor()
+    cursor.execute("UPDATE items SET item_status='FSL' where barcode = ?",(barcode,))
+    con.commit()
+    con.close()
 
 def checkout_destroyer():
     if checkout_frame is not None:
         checkout_frame.destroy()
 
-def checkouttoFSL(root):
-    root.destroy()
+def checkouttoFSL():
     barcode = entry_barcode.get()
     fir_no = entry_fir_no.get()
     item_name = entry_item_name.get()
@@ -20,20 +27,21 @@ def checkouttoFSL(root):
     date = entry_checkout_date.get_date()
     time = f"{hour_var.get()}:{minute_var.get()}"
     order_no = entry_order_no.get()
-    nature_of_case=entry_nature_of_case.get()
+
+    update_item_status(barcode)
+    log.update_logs(barcode, "Checked out to FSL", date, time)
 
     # Clear the input fields after checkout
     entry_barcode.delete(0, tk.END)
     entry_fir_no.delete(0, tk.END)
     entry_item_name.delete(0, tk.END)
     entry_taken_by_whom.delete(0, tk.END)
-    entry_checkout_date.set_date("")  # Clear the date entry
+    entry_checkout_date.set_date(None)  # Clear the date entry
     order_no.delete(0 , tk.END)
-    nature_of_case.delete(0,tk.END)
 
 def checkouttoFSL_page(root):
     root.destroy()
-    global checkout_frame, entry_barcode, entry_fir_no, entry_item_name, entry_taken_by_whom, entry_checkout_date, hour_var, minute_var,entry_order_no,entry_nature_of_case
+    global checkout_frame, entry_barcode, entry_fir_no, entry_item_name, entry_taken_by_whom, entry_checkout_date, hour_var, minute_var,entry_order_no
     checkout_destroyer()
     checkout_frame = tk.Frame(root.master)
     checkout_frame.master.title("Checkout to FSL")
@@ -47,16 +55,14 @@ def checkouttoFSL_page(root):
     label_checkout_date = ttk.Label(checkout_frame, text="Checkout Date:")
     label_checkout_time = ttk.Label(checkout_frame, text="Checkout Time:")
     label_order_no =ttk.Label(checkout_frame, text="Order No.:")
-    label_nature_of_case=ttk.Label(checkout_frame,text="Nature Of case:")
 
     label_barcode.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_fir_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
     label_item_name.grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
     label_taken_by_whom.grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
-    label_checkout_date.grid(row=4, column=0, padx=5, pady=5, sticky=tk.W)
-    label_checkout_time.grid(row=5, column=0, padx=5, pady=5, sticky=tk.W)
-    label_order_no.grid(row=6,column=0,padx=5,pady=5,sticky=tk.W)
-    label_nature_of_case.grid(row=7,column=0,padx=5,pady=5,sticky=tk.W)
+    label_checkout_date.grid(row=7, column=0, padx=5, pady=5, sticky=tk.W)
+    label_checkout_time.grid(row=6, column=0, padx=5, pady=5, sticky=tk.W)
+    label_order_no.grid(row=4,column=0,padx=5,pady=5,sticky=tk.W)
 
     # Entry fields
     entry_barcode = ttk.Entry(checkout_frame)
@@ -70,7 +76,6 @@ def checkouttoFSL_page(root):
     entry_item_name.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
     entry_taken_by_whom.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)
     entry_order_no.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
-    entry_nature_of_case.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)
     
     hour_var = tk.StringVar(checkout_frame, value='00')
     minute_var = tk.StringVar(checkout_frame, value='00')
