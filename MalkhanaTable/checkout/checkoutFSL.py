@@ -3,9 +3,16 @@ import home.Homepage as Homepage
 import MalkhanaTable.checkout.checkoutpage as cof
 import MalkhanaTable.MalkhanaPage as m
 from tkinter import ttk
+import sqlite3
 from tkcalendar import DateEntry
 
 checkout_frame = None
+def update_item_status(barcode):
+    con = sqlite3.connect('databases/items_in_malkhana.db')
+    cursor = con.cursor()
+    cursor.execute("UPDATE items SET item_status='FSL' where barcode = ?",(barcode,))
+    con.commit()
+    con.close()
 
 def checkout_destroyer():
     if checkout_frame is not None:
@@ -20,6 +27,8 @@ def checkouttoFSL(root):
     date = entry_checkout_date.get_date()
     time = f"{hour_var.get()}:{minute_var.get()}"
     order_no = entry_order_no.get()
+
+    update_item_status(entry_barcode)
 
     # Clear the input fields after checkout
     entry_barcode.delete(0, tk.END)
