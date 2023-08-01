@@ -1,13 +1,32 @@
 import tkinter as tk
 from tkinter import ttk
+import home.Homepage as Homepage
+import MalkhanaTable.checkin.checkinpage as cp
 import sqlite3
 from datetime import datetime, date
 
 CL_frame = None
 
+def update_logs(barcode, status, date, time):
+    conn = sqlite3.connect('logs.db')
+    cursor = conn.cursor()
+    # Create the 'logs' table if it doesn't exist
+    cursor.execute('''CREATE TABLE IF NOT EXISTS logs (
+                        Barcode TEXT,
+                        Status TEXT,
+                        Date DATE,
+                        Time TEXT
+                    )''')
+    # Assuming that the 'logs' table has columns: "Barcode", "Status", "Date", "Time"
+    cursor.execute("INSERT INTO logs (Barcode, Status, Date, Time) VALUES (?, ?, ?, ?)",
+                   (barcode, status, date, time))
+
+    conn.commit()
+    conn.close()
+
 def search_logs(search_barcode):
     # Fetch logs data from the SQLite database based on the search barcode
-    conn = sqlite3.connect('malkhana.db')
+    conn = sqlite3.connect('logs.db')
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM logs WHERE Barcode=?", (search_barcode,))
@@ -15,11 +34,10 @@ def search_logs(search_barcode):
 
     conn.close()
     return logs_data
-
 def create_logs_page(prev_homepage_frame):
     prev_homepage_frame.destroy()
     global CL_frame
-    create_logs_page_destroyer()
+    CL_destroyer()
     CL_frame = tk.Frame(prev_homepage_frame.master)
     CL_frame.master.title("Logs")
     CL_frame.pack()
@@ -60,12 +78,26 @@ def create_logs_page(prev_homepage_frame):
     barcode_search_entry = ttk.Entry(search_frame, width=20)
     barcode_search_entry.pack(side=tk.LEFT, padx=5)
 
-    search_button = ttk.Button(search_frame, text="Search",)
-                            #    command=lambda: '''search_and_display_logs(barcode_search_entry.get(),''' logs_tree))
+    search_button = ttk.Button(search_frame, text="Search", command=lambda: search_logs_and_display(barcode_search_entry.get(), logs_tree))
     search_button.pack(side=tk.LEFT)
+
+    Home = tk.Button(CL_frame, text="Home", command=go_home)
+    Home.pack(side=tk.LEFT, padx=10, pady=10)
 
     CL_frame.mainloop()
 
-def create_logs_page_destroyer():
+def search_logs_and_display(search_barcode, logs_tree):
+    logs_data = search_logs(search_barcode)
+    logs_tree.delete(*logs_tree.get_children())
+
+    for log_entry in logs_data:
+        logs_tree.insert("", tk.END, values=log_entry)
+
+
+def go_home():
+    CL_destroyer()
+    Homepage.open_homepage_r(CL_frame)
+
+def CL_destroyer():
     if CL_frame is not None:
         CL_frame.destroy()
