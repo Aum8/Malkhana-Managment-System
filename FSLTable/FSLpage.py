@@ -100,10 +100,10 @@ def viewfsl(prev_malkhana_frame):
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Create a button to go back to the homepage
-    back_button = tk.Button(viewfsl_frame, text="પાછા જાઓ", command=go_back)
+    back_button = tk.Button(viewfsl_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 10))
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewfsl_frame, text="લૉગઆઉટ", command=logoutclicked)
+    logout = tk.Button(viewfsl_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
     logout.pack(padx=12, pady=10)
 
     # Create a search entry and button
@@ -116,10 +116,10 @@ def viewfsl(prev_malkhana_frame):
     search_field_menu = ttk.Combobox(viewfsl_frame, textvariable=search_field_var, values=tree["columns"], state='readonly')
     search_field_menu.pack()
 
-    search_button = tk.Button(viewfsl_frame, text="શોધ", command=lambda: search_fsl(tree, search_field_var.get(), search_var.get()))
+    search_button = tk.Button(viewfsl_frame, text="શોધ", command=lambda: search_fsl(tree, search_field_var.get(), search_var.get()), font=("Helvetica", 12))
     search_button.pack()
 
-    show_all_btn = tk.Button(viewfsl_frame, text="બધા બતાવો", command=lambda: show_all_fsl(tree))
+    show_all_btn = tk.Button(viewfsl_frame, text="બધા બતાવો", command=lambda: show_all_fsl(tree), font=("Helvetica", 12))
     show_all_btn.pack()
 
 def search_fsl(tree, search_field, search_text):

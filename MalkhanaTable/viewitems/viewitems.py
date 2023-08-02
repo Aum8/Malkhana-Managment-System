@@ -100,7 +100,7 @@ def viewitems(prev_malkhana_frame):
     back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back)
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", command=logoutclicked)
+    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
     logout.pack(padx=12, pady=10)
 
     # Create a search entry and button
@@ -113,10 +113,10 @@ def viewitems(prev_malkhana_frame):
     search_field_menu = ttk.Combobox(viewitems_frame, textvariable=search_field_var, values=tree["columns"], state='readonly')
     search_field_menu.pack()
 
-    search_button = tk.Button(viewitems_frame, text="શોધ", command=lambda: search_items(tree, search_field_var.get(), search_var.get()))
+    search_button = tk.Button(viewitems_frame, text="શોધ", command=lambda: search_items(tree, search_field_var.get(), search_var.get()), font=("Helvetica", 12))
     search_button.pack()
 
-    show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", command=lambda: show_all(tree))
+    show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", command=lambda: show_all(tree), font=("Helvetica", 12))
     show_all_btn.pack()
 
 def go_back():
