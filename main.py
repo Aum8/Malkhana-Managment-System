@@ -4,7 +4,7 @@ def main():
     root = tk.Tk()
     root.state('zoomed')
     root.title("Main Window")
-    root.configure(bg='#263238')
+
     main_frame = tk.Frame(root)
     main_frame.pack()
 

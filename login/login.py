@@ -25,18 +25,15 @@ def initloginpage(prev_main_frame):
 
     login_destroyer()
 
-    login_frame = tk.Frame(prev_main_frame.master, bg='#263238')
+    login_frame = tk.Frame(prev_main_frame.master)
     login_frame.pack(expand=True)
 
     # Set dark theme style
     style = ttk.Style()
     style.theme_use('alt')
-    style.configure('TLabel', background='#263238', foreground='white', font=("Helvetica", 20))
-    style.configure('TButton', background='#1976D2', foreground='white', font=("Helvetica", 20))
-    style.configure('TEntry', fieldbackground='#37474F', foreground='white', font=("Helvetica", 20))
 
-    label_heading = ttk.Label(login_frame, text="માલખાના મેનેજમેન્ટ સિસ્ટમ", anchor=tk.W, background='#263238',font=("Verdana",40))
-    label_station = ttk.Label(login_frame, text="ગોત્રી પોલીસ સ્ટેશન", anchor=tk.W, background='#263238',font=("Verdana",40))
+    label_heading = ttk.Label(login_frame, text="માલખાના મેનેજમેન્ટ સિસ્ટમ", anchor=tk.W,font=("Verdana",30))
+    label_station = ttk.Label(login_frame, text="ગોત્રી પોલીસ સ્ટેશન", anchor=tk.W,font=("Verdana",30))
     label_heading.grid(row=0, column=0, columnspan=2, pady=(0, 5), sticky=tk.W)
     label_station.grid(row=1, column=0, columnspan=2, pady=(0, 50), sticky=tk.W)
 
@@ -47,8 +44,6 @@ def initloginpage(prev_main_frame):
     label_password = ttk.Label(login_frame, text="Password:")
     entry_username = ttk.Entry(login_frame)
     entry_password = ttk.Entry(login_frame, show="*")
-    entry_username.config(font=("Helvetica", 20))
-    entry_password.config(font=("Helvetica", 20))
     button_login = ttk.Button(login_frame, text="Login", command=check_login)
     
 
@@ -62,13 +57,3 @@ def login_destroyer():
     if login_frame is not None:
         login_frame.destroy()
 
-if __name__ == "__main__":
-    # Create the main tkinter window
-    root = tk.Tk()
-    root.geometry("400x300")
-    root.configure(bg='#263238')  # Set the background color for the root window
-
-    # Call the login page initialization function
-    initloginpage(root)
-
-    root.mainloop()
