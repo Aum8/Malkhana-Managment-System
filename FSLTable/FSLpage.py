@@ -79,7 +79,7 @@ def viewfsl(prev_malkhana_frame):
         cursor = conn.cursor()
 
         # Execute the SQL command to select all rows from the table
-        cursor.execute('''SELECT * FROM fsl_records''')
+        cursor.execute('''SELECT * FROM fsl_records ORDER by timee DESC''')
 
         # Fetch all the rows and insert them into the treeview
         for row in cursor.fetchall():
@@ -157,7 +157,7 @@ def show_all_fsl(tree):
     try:
         conn = sqlite3.connect("databases/fsl_records.db")
         cursor = conn.cursor()
-        cursor.execute('''SELECT * FROM fsl_records''')
+        cursor.execute('''SELECT * FROM fsl_records ORDER BY timee DESC''')
         for row in cursor.fetchall():
             tree.insert("", tk.END, values=row)
 
@@ -167,6 +167,7 @@ def show_all_fsl(tree):
     except Exception as e:
         # Display error message if there's an issue with the database
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
+
 
 # Helper function to convert Gujarati column names to English
 def convert_to_english(column_name_gujarati):

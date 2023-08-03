@@ -7,7 +7,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
 from tkcalendar import DateEntry
-
+import datetime
 checkout_frame = None
 def update_item_status(barcode):
     con = sqlite3.connect('databases/items_in_malkhana.db')
@@ -29,7 +29,7 @@ def checkouttoFSL():
     time = f"{hour_var.get()}:{minute_var.get()}"
     order_no = entry_order_no.get()
 
-    barcode_checker(barcode,date,time)
+    barcode_checker(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
 
 def checkouttoFSL_page(root):
     root.destroy()
@@ -101,7 +101,7 @@ def go_home():
     checkout_destroyer()
     Homepage.open_homepage_r(checkout_frame)
 
-def barcode_checker(barcode,date,time):
+def barcode_checker(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn = sqlite3.connect("databases/items_in_malkhana.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM items WHERE barcode = ?", (barcode,))
@@ -118,7 +118,7 @@ def barcode_checker(barcode,date,time):
         entry_checkout_date.set_date(None)  # Clear the date entry
         entry_order_no.delete(0, tk.END)
         return
-    already_outornot(barcode,date,time)
+    already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
     # Clear the input fields after successful checkout
     entry_barcode.delete(0, tk.END)
     entry_fir_no.delete(0, tk.END)
@@ -127,7 +127,7 @@ def barcode_checker(barcode,date,time):
     entry_checkout_date.set_date(None)  # Clear the date entry
     entry_order_no.delete(0, tk.END)
 
-def already_outornot(barcode,date,time):
+def already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn = sqlite3.connect("databases/items_in_malkhana.db")
     cursor = conn.cursor()
     cursor.execute("SELECT item_status FROM items WHERE barcode = ?", (barcode,))
@@ -137,6 +137,7 @@ def already_outornot(barcode,date,time):
         update_item_status(barcode)
         log.update_logs(barcode, "Checked out to FSL", date, time)
         messagebox.showinfo("Success", "Item sent to FSL successfully!")
+        addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
     else:
         messagebox.showerror("Item not available", "The item is not available in Malkhana.")
         entry_barcode.delete(0, tk.END)
@@ -145,3 +146,26 @@ def already_outornot(barcode,date,time):
         entry_taken_by_whom.delete(0, tk.END)
         entry_checkout_date.set_date(None)  
         entry_order_no.delete(0, tk.END)
+
+
+def addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
+    conn = sqlite3.connect("databases/fsl_records.db")
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS fsl_records (
+    barcode TEXT UNIQUE,
+    fir_number TEXT UNIQUE,
+    item_name TEXT,
+    fsl_order_no INTEGER UNIQUE,
+    checkout_date TEXT,
+    checkout_time TEXT,
+    taken_by_whom TEXT,
+    checkin_date TEXT,
+    checkin_time TEXT,
+    examiner_name TEXT,
+    fsl_report TEXT,
+    timee TEXT
+    );''')
+    timee = datetime.datetime.now()
+    cursor.execute("INSERT INTO fsl_records (barcode,fir_number,item_name,fsl_order_no,checkout_date,checkout_time,taken_by_whom,timee) values(?,?,?,?,?,?,?,?)",(barcode,fir_no,item_name,order_no,date,time,taken_by_whom,timee))
+    conn.commit()
+    conn.close()

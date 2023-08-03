@@ -34,6 +34,7 @@ def mkpage(prev_homepage_frame):
     checkout_button.pack()
     checkout_button.pack(pady=20)
 
+
     logout = tk.Button(malkhanapage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
     logout.pack(side='right', anchor=tk.NE, padx=12, pady=10)
 
