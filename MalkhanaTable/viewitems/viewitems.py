@@ -6,6 +6,9 @@ from tkinter import ttk
 import home.Homepage as homepage
 import MalkhanaTable.MalkhanaPage as m
 import login.login as login
+from PIL import Image, ImageTk
+import os
+import MalkhanaTable.additems.additems as ai
 
 viewitems_frame = None
 
@@ -82,6 +85,8 @@ def viewitems(prev_malkhana_frame):
         for row in cursor.fetchall():
             tree.insert("", tk.END, values=row)
 
+        tree.bind("<<TreeviewSelect>>", lambda event: on_tree_select(event, tree))
+
         # Commit the changes
         conn.commit()
         conn.close()
@@ -118,6 +123,31 @@ def viewitems(prev_malkhana_frame):
 
     show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", command=lambda: show_all(tree))
     show_all_btn.pack()
+
+def on_tree_select(event, tree):
+    selected_item = tree.selection()
+    if selected_item:
+        item_values = tree.item(selected_item)['values']
+        attachment_path = item_values[-1]  # The last value is the attachment path
+        show_attachment(attachment_path)
+
+def show_attachment(attachment_path):
+    attachment_window = tk.Toplevel()
+    attachment_window.title("Attachment")
+    attachment_window.geometry("800x600")
+    if ai.file_entry and os.path.exists(ai.file_entry):
+        # Open and display the image in a new window
+        image = Image.open(ai.file_entry)
+        photo = ImageTk.PhotoImage(image)
+
+        # Create a new window to display the image
+        image_window = tk.Toplevel(viewitems_frame)
+        image_window.title("View Attachment")
+        image_label = tk.Label(image_window, image=photo)
+        image_label.photo = photo  # Keep a reference to the PhotoImage object
+        image_label.pack()
+    else:
+        tk.messagebox.showinfo("Error", "Attachment not found!")
 
 def go_back():
     viewitems_destroyer()

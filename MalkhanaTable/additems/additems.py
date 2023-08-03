@@ -6,8 +6,10 @@ from tkcalendar import DateEntry
 import home.Homepage as Homepage
 import MalkhanaTable.MalkhanaPage as m
 import login.login as login
+from tkinter import filedialog
 import datetime
 additems_frame = None
+
 def additems(prev_malkhana_frame):
     prev_malkhana_frame.destroy()
 
@@ -62,7 +64,8 @@ def additems(prev_malkhana_frame):
     hour_menu.grid(row=6, column=1, padx=10, pady=10)  # Place the hour drop-down menu
     minute_menu.grid(row=6, column=2, padx=10, pady=10)  # Place the minute drop-down menu
 
-
+    add_attachment_button = tk.Button(additems_frame, text="Add Attachment", command=browse_file)
+    add_attachment_button.grid(row=11, column=1, padx=10, pady=10)
     
     add_item_button = tk.Button(additems_frame, text="આઇટમ ઉમેરો", command=insert_data)
     add_item_button.grid(row=13, column=0, columnspan=4, padx=10, pady=10)
@@ -118,15 +121,16 @@ def insert_data():
                             crime_inspector TEXT,
                             item_status TEXT,
                             where_its_kept TEXT,
-                            timee TEXT
+                            timee TEXT,
+                            attachments text
                         );''')
         timee = datetime.datetime.now()
         # Execute the SQL command to insert data into the table
         cursor.execute('''INSERT INTO items (barcode,fir_number, item_name, ipc_section, 
                           crime_scene, crime_date, crime_time, crime_witnesses, 
-                          crime_inspector,item_status,where_its_kept,timee) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?)''',
+                          crime_inspector,item_status,where_its_kept,timee,attachments) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)''',
                        (barcode,fir_number, item_name, ipc_section, crime_scene, crime_date,
-                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept,timee))
+                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept,timee,file_entry))
         
         # Commit the changes
         conn.commit()
@@ -151,6 +155,13 @@ def insert_data():
 
     except Exception as e:
         messagebox.showerror("Error", f"Error occurred: {str(e)}")
+
+def browse_file():
+    global file_path,file_entry
+    # Ask user to select a file for attachment
+    file_path = filedialog.askopenfilename()
+    if file_path:
+        file_entry=file_path
 
 def go_back():
     additems_destroyer()
