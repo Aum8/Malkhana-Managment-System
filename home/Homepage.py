@@ -37,16 +37,16 @@ def open_homepage_r(return_frame):
     homepage_frame = tk.Frame(return_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl)
+    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, font=("Helvetica", 12))
     FSL_button.grid(row=1, column=0, pady=10)
     
-    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked)
+    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
     logout.grid(row=3, pady=10)
 
-    table_button = tk.Button(homepage_frame, text="મલખાના ટેબલ", command=clicked)
+    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, font=("Helvetica", 12))
     table_button.grid(row=0, column=0, pady=20)
 
-    log_button = tk.Button(homepage_frame, text="Logs", command=log)
+    log_button = tk.Button(homepage_frame, text="Logs", command=log, font=("Helvetica", 12))
     log_button.grid(row=2, column=0, pady=10)
 
     homepage_frame.master.title("હોમપેજ")
