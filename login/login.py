@@ -44,7 +44,7 @@ def initloginpage(prev_main_frame):
     entry_username = tk.Entry(login_frame)
     entry_password = tk.Entry(login_frame, show="*")
     button_login = tk.Button(login_frame, text="Login", command=check_login)
-    changelang = tk.Button(login_frame,text="Change",command= lang)
+    changelang = tk.Button(login_frame,text="Change Language",command= lang)
     changeback = tk.Button(login_frame,text="Change back",command= lang2)
 
     label_username.pack(pady=10)
