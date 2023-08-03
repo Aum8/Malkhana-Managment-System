@@ -9,12 +9,13 @@ import login.login as login
 from PIL import Image, ImageTk
 import os
 import MalkhanaTable.additems.additems as ai
+import io
 
 viewitems_frame = None
 
 def viewitems(prev_malkhana_frame):
     prev_malkhana_frame.destroy()
-    global viewitems_frame
+    global viewitems_frame,tree
     viewitems_frame = tk.Frame(prev_malkhana_frame.master)
     viewitems_frame.master.title("વસ્તુઓ જુઓ")
     viewitems_frame.pack(fill=tk.BOTH, expand=True)  # To occupy the whole screen
@@ -39,7 +40,8 @@ def viewitems(prev_malkhana_frame):
         "અપરાધ સાક્ષીઓ",
         "અપરાધ નિરીક્ષક",
         "વસ્તુનું અવસ્થા",
-        "ક્યાં રાખી છે"
+        "ક્યાં રાખી છે",
+        "attachments"
     )
 
     # Format columns
@@ -55,6 +57,7 @@ def viewitems(prev_malkhana_frame):
     tree.column("અપરાધ નિરીક્ષક", anchor=tk.W, width=150)
     tree.column("વસ્તુનું અવસ્થા", anchor=tk.W, width=100)
     tree.column("ક્યાં રાખી છે", anchor=tk.W, width=150)
+    tree.column("attachments", anchor=tk.W, width=0)
 
     # Create headings
     tree.heading("#0", text="", anchor=tk.W)
@@ -69,6 +72,7 @@ def viewitems(prev_malkhana_frame):
     tree.heading("અપરાધ નિરીક્ષક", text="અપરાધ નિરીક્ષક", anchor=tk.W)
     tree.heading("વસ્તુનું અવસ્થા", text="વસ્તુનું અવસ્થા", anchor=tk.W)
     tree.heading("ક્યાં રાખી છે", text="ક્યાં રાખી છે", anchor=tk.W)
+    tree.heading("attachments", text="ક્યાં રાખી છે", anchor=tk.W)
 
     # Add data to the treeview from the database
     try:
@@ -85,8 +89,6 @@ def viewitems(prev_malkhana_frame):
         for row in cursor.fetchall():
             tree.insert("", tk.END, values=row)
 
-        tree.bind("<<TreeviewSelect>>", lambda event: on_tree_select(event, tree))
-
         # Commit the changes
         conn.commit()
         conn.close()
@@ -99,6 +101,10 @@ def viewitems(prev_malkhana_frame):
     tree.pack(fill=tk.BOTH, expand=True)
     x_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    # Attachments Button
+    view_attachment_button = tk.Button(viewitems_frame, text="View Attachment", command=view_attachment)
+    view_attachment_button.pack(pady=7)
 
     # Create a button to go back to the homepage
     back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back)
@@ -123,32 +129,34 @@ def viewitems(prev_malkhana_frame):
     show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", command=lambda: show_all(tree), font=("Helvetica", 12))
     show_all_btn.pack()
 
-def on_tree_select(event, tree):
-    selected_item = tree.selection()
-    if selected_item:
-        item_values = tree.item(selected_item)['values']
-        attachment_path = item_values[-1]  # The last value is the attachment path
-        show_attachment(attachment_path)
 
-def show_attachment(attachment_path):
-    attachment_window = tk.Toplevel()
-    attachment_window.title("Attachment")
-    attachment_window.geometry("800x600")
+def view_attachment():
+    selected_item = tree.focus()
+    barcode = tree.item(selected_item, 'values')[0]  # Assuming the barcode is the first value in the row
 
-    try:
-        if os.path.exists(attachment_path):
-            # Open and display the image in a new window
-            image = Image.open(attachment_path)
-            photo = ImageTk.PhotoImage(image)
+    conn = sqlite3.connect('databases/attachments.db')
+    cursor = conn.cursor()
 
-            # Create a label to display the image
-            image_label = tk.Label(attachment_window, image=photo)
-            image_label.photo = photo  # Keep a reference to the PhotoImage object
-            image_label.pack()
-        else:
-            tk.messagebox.showinfo("Error", "Attachment not found!")
-    except Exception as e:
-        tk.messagebox.showinfo("Error", f"Failed to load attachment: {str(e)}")
+    cursor.execute("SELECT attachment_data FROM attachments WHERE barcode = ?", (barcode,))
+    attachment_data = cursor.fetchone()
+
+    conn.close()
+
+    if attachment_data:
+        # Access the attachment data from the tuple with index 0
+        image_data = attachment_data[0]
+
+        image = Image.open(io.BytesIO(image_data))
+        photo = ImageTk.PhotoImage(image)
+
+        # Create a new window to display the image
+        image_window = tk.Toplevel(viewitems_frame)
+        image_window.title("View Attachment")
+        image_label = tk.Label(image_window, image=photo)
+        image_label.photo = photo  # Keep a reference to the PhotoImage object
+        image_label.pack()
+    else:
+        messagebox.showinfo("No Attachment", "No attachment found for this item.")
 
 
 def go_back():
@@ -230,4 +238,3 @@ def convert_to_english(column_name_gujarati):
     }
 
     return gujarati_to_english.get(column_name_gujarati, column_name_gujarati)
-
