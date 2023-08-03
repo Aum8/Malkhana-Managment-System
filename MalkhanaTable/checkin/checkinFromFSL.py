@@ -7,15 +7,17 @@ from tkinter import messagebox
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
+
 fsl_checkin_frame = None
+
 def update_item_status(barcode):
     con = sqlite3.connect('databases/items_in_malkhana.db')
     cursor = con.cursor()
     cursor.execute("UPDATE items SET item_status='malkhana' where barcode = ?",(barcode,))
     con.commit()
     con.close()
+
 def checkin():
-    
     barcode_no = entry_barcode_no.get()
     checkin_time = f"{hour_var.get()}:{minute_var.get()}"
     checkin_date = entry_checkin_date.get_date()
@@ -23,24 +25,23 @@ def checkin():
     examiner = entry_examiner.get()
     examiner_report = text_examiner_report.get("1.0", "end-1c")
     
-    barcode_checker(barcode_no,checkin_date,checkin_time,order_no,examiner,examiner_report)
-    
+    barcode_checker(barcode_no, checkin_date, checkin_time, order_no, examiner, examiner_report)
 
 def checkin_page(prev_checkin_page):
-    global fsl_checkin_frame, entry_barcode_no,entry_order_no, entry_checkin_date, hour_var, minute_var, text_examiner_report,entry_examiner
+    global fsl_checkin_frame, entry_barcode_no, entry_order_no, entry_checkin_date, hour_var, minute_var, text_examiner_report, entry_examiner
     fsL_checkin_destroyer()
     fsl_checkin_frame = tk.Frame(prev_checkin_page.master)
-    fsl_checkin_frame.master.title("Check-in From FSL")
+    fsl_checkin_frame.master.title("ફોરેન્સિક સાયન્સ લેબથી ચેક-ઇન")
 
     fsl_checkin_frame.pack(fill=tk.BOTH, expand=True)  # Use pack for the fsl_checkin_frame
 
     # Labels
-    label_barcode_no = ttk.Label(fsl_checkin_frame, text="Barcode No.:")
-    label_order_no = ttk.Label(fsl_checkin_frame, text="Order No.:")
-    label_checkin_time = ttk.Label(fsl_checkin_frame, text="Check-in Time:")
-    label_checkin_date = ttk.Label(fsl_checkin_frame, text="Check-in Date:")
-    label_examiner = ttk.Label(fsl_checkin_frame, text="Examiner name:")
-    label_examiner_report = ttk.Label(fsl_checkin_frame, text="Examiner Report:")
+    label_barcode_no = ttk.Label(fsl_checkin_frame, text="બારકોડ નંબર:", font=("Helvetica", 12))
+    label_order_no = ttk.Label(fsl_checkin_frame, text="ઓર્ડર નંબર:", font=("Helvetica", 12))
+    label_checkin_time = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન સમય:", font=("Helvetica", 12))
+    label_checkin_date = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન તારીખ:", font=("Helvetica", 12))
+    label_examiner = ttk.Label(fsl_checkin_frame, text="પરીક્ષકનું નામ:", font=("Helvetica", 12))
+    label_examiner_report = ttk.Label(fsl_checkin_frame, text="પરીક્ષક રિપોર્ટ:", font=("Helvetica", 12))
 
     label_barcode_no.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_order_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
@@ -50,12 +51,10 @@ def checkin_page(prev_checkin_page):
     label_examiner_report.grid(row=5, column=0, padx=5, pady=5, sticky=tk.W)
 
     # Entry fields
-    entry_barcode_no = ttk.Entry(fsl_checkin_frame)
+    entry_barcode_no = ttk.Entry(fsl_checkin_frame, font=("Helvetica", 12))
     entry_barcode_no.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)  # Use sticky=tk.W for left alignment
-    entry_order_no = ttk.Entry(fsl_checkin_frame)
-    entry_order_no.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W) 
-
-
+    entry_order_no = ttk.Entry(fsl_checkin_frame, font=("Helvetica", 12))
+    entry_order_no.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
 
     hour_var = tk.StringVar(fsl_checkin_frame, value='00')
     minute_var = tk.StringVar(fsl_checkin_frame, value='00')
@@ -69,31 +68,29 @@ def checkin_page(prev_checkin_page):
     entry_checkin_date = DateEntry(fsl_checkin_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
     entry_checkin_date.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)  # Use sticky=tk.W for left alignment
 
-  
-    entry_examiner = ttk.Entry(fsl_checkin_frame)
+    entry_examiner = ttk.Entry(fsl_checkin_frame, font=("Helvetica", 12))
     entry_examiner.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Text area for examiner report
-    text_examiner_report = tk.Text(fsl_checkin_frame, height=5, width=30)
+    text_examiner_report = tk.Text(fsl_checkin_frame, height=5, width=30, font=("Helvetica", 12))
     text_examiner_report.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)  # Use sticky=tk.W for left alignment
 
     # Check-in button
-    checkin_button = ttk.Button(fsl_checkin_frame, text="Check-in", command=checkin)
+    checkin_button = tk.Button(fsl_checkin_frame, text="ચેક-ઇન", command=checkin, font=("Helvetica", 12))
     checkin_button.grid(row=6, column=0, columnspan=2, padx=5, pady=10)
 
-
-    Home = tk.Button(fsl_checkin_frame, text="Home", command=go_home)
+    Home = tk.Button(fsl_checkin_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
     Home.grid(row=7, column=0, padx=10, pady=10, sticky=tk.E)
 
-    back_button = tk.Button(fsl_checkin_frame, text="Back", command=go_back)
+    back_button = tk.Button(fsl_checkin_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
     back_button.grid(row=7, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_home():
-    fsL_checkin_destroyer
+    fsL_checkin_destroyer()
     Homepage.open_homepage_r(fsl_checkin_frame)
 
 def go_back():
-    fsL_checkin_destroyer
+    fsL_checkin_destroyer()
     cp.CIpage(fsl_checkin_frame)
 
 def fsL_checkin_destroyer():
@@ -109,7 +106,7 @@ def barcode_checker(barcode,date,time,order_no,examiner,examiner_report):
     conn.close()
 
     if not result:
-        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        messagebox.showerror("બારકોડ મળ્યો નથી", "દાખલ કરેલો બારકોડ ડેટાબેઝમાં અસ્તિત્વમાં નથી.")
         # Clear the input fields after showing the error
         entry_barcode_no.delete(0, tk.END)
         entry_examiner.delete(0, tk.END)
@@ -131,12 +128,12 @@ def already_inornot(barcode,date,time,order_no,examiner,examiner_report):
     conn.close()
     if result and result[0] in ("fsl", "FSL"):
         update_item_status(barcode)
-        log.update_logs(barcode, "Checked in from FSL", date, time)
-        messagebox.showinfo("Success", "Item recieved from FSL successfully!")
+        log.update_logs(barcode, "ફોરેન્સિક સાયન્સ લેબથી ચેક-ઇન", date, time)
+        messagebox.showinfo("સફળતા", "આઇટમ સફળતાપૂર્વક FSL માંથી મળ્યું છે!")
         updatefsl(barcode,date,time,order_no,examiner,examiner_report)
         
     else:
-        messagebox.showerror("Item already available", "The item is already there in Malkhana.")
+        messagebox.showerror("આઇટમ પહેલેથીજ ઉપલબ્ધ છે", "આ આઇટમ માલખાનામાં પહેલેથીજ ઉપલબ્ધ છે.")
         entry_barcode_no.delete(0, tk.END)
         entry_examiner.delete(0, tk.END)
         entry_checkin_date.set_date(None)

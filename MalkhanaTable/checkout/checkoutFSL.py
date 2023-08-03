@@ -9,6 +9,7 @@ import sqlite3
 from tkcalendar import DateEntry
 import datetime
 checkout_frame = None
+
 def update_item_status(barcode):
     con = sqlite3.connect('databases/items_in_malkhana.db')
     cursor = con.cursor()
@@ -33,20 +34,20 @@ def checkouttoFSL():
 
 def checkouttoFSL_page(root):
     root.destroy()
-    global checkout_frame, entry_barcode, entry_fir_no, entry_item_name, entry_taken_by_whom, entry_checkout_date, hour_var, minute_var,entry_order_no
+    global checkout_frame, entry_barcode, entry_fir_no, entry_item_name, entry_taken_by_whom, entry_checkout_date, hour_var, minute_var, entry_order_no
     checkout_destroyer()
     checkout_frame = tk.Frame(root.master)
-    checkout_frame.master.title("Checkout to FSL")
+    checkout_frame.master.title("કોર્ટને ચેકઆઉટ")
     checkout_frame.pack()
 
     # Labels
-    label_barcode = ttk.Label(checkout_frame, text="Barcode:")
-    label_fir_no = ttk.Label(checkout_frame, text="FIR No.:")
-    label_item_name = ttk.Label(checkout_frame, text="Item Name:")
-    label_taken_by_whom = ttk.Label(checkout_frame, text="Taken by Whom:")
-    label_checkout_date = ttk.Label(checkout_frame, text="Checkout Date:")
-    label_checkout_time = ttk.Label(checkout_frame, text="Checkout Time:")
-    label_order_no =ttk.Label(checkout_frame, text="Order No.:")
+    label_barcode = ttk.Label(checkout_frame, text="બારકોડ:", font=("Helvetica", 12))
+    label_fir_no = ttk.Label(checkout_frame, text="FIR નંબર:", font=("Helvetica", 12))
+    label_item_name = ttk.Label(checkout_frame, text="વસ્ત્રનું નામ:", font=("Helvetica", 12))
+    label_taken_by_whom = ttk.Label(checkout_frame, text="કોણે લેવું છે:", font=("Helvetica", 12))
+    label_checkout_date = ttk.Label(checkout_frame, text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
+    label_checkout_time = ttk.Label(checkout_frame, text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
+    label_order_no = ttk.Label(checkout_frame, text="ઓર્ડર નંબર:", font=("Helvetica", 12))
 
     label_barcode.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_fir_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
@@ -54,14 +55,14 @@ def checkouttoFSL_page(root):
     label_taken_by_whom.grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
     label_checkout_date.grid(row=7, column=0, padx=5, pady=5, sticky=tk.W)
     label_checkout_time.grid(row=6, column=0, padx=5, pady=5, sticky=tk.W)
-    label_order_no.grid(row=4,column=0,padx=5,pady=5,sticky=tk.W)
+    label_order_no.grid(row=4, column=0, padx=5, pady=5, sticky=tk.W)
 
     # Entry fields
-    entry_barcode = ttk.Entry(checkout_frame)
-    entry_fir_no = ttk.Entry(checkout_frame)
-    entry_item_name = ttk.Entry(checkout_frame)
-    entry_taken_by_whom = ttk.Entry(checkout_frame)
-    entry_order_no = ttk.Entry(checkout_frame)
+    entry_barcode = ttk.Entry(checkout_frame, font=("Helvetica", 12))
+    entry_fir_no = ttk.Entry(checkout_frame, font=("Helvetica", 12))
+    entry_item_name = ttk.Entry(checkout_frame, font=("Helvetica", 12))
+    entry_taken_by_whom = ttk.Entry(checkout_frame, font=("Helvetica", 12))
+    entry_order_no = ttk.Entry(checkout_frame, font=("Helvetica", 12))
     entry_barcode.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
     entry_fir_no.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
     entry_item_name.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
@@ -73,29 +74,27 @@ def checkouttoFSL_page(root):
 
     hour_menu = ttk.Combobox(checkout_frame, textvariable=hour_var, values=[str(i).zfill(2) for i in range(24)], state='readonly', width=5)
     minute_menu = ttk.Combobox(checkout_frame, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
-    hour_menu.grid(row=6, column=1, padx=5, pady=5, sticky=tk.W)
-    minute_menu.grid(row=6, column=2, padx=5, pady=5, sticky=tk.W)
+    hour_menu.grid(row=6, column=1, padx=0, pady=5, sticky=tk.W)
+    minute_menu.grid(row=6, column=2, padx=0, pady=5, sticky=tk.W)
 
     # Date field using tkcalendar
     entry_checkout_date = DateEntry(checkout_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
     entry_checkout_date.grid(row=7, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Checkout button
-    checkout_button = ttk.Button(checkout_frame, text="Checkout to FSL", command=checkouttoFSL)
+    checkout_button = tk.Button(checkout_frame, text="કોર્ટને ચેકઆઉટ", command=checkouttoFSL, font=("Helvetica", 12))
     checkout_button.grid(row=8, column=0, columnspan=2, padx=5, pady=10)
 
     # Home and Back buttons
-    home_button = tk.Button(checkout_frame, text="Home", command=go_home)
+    home_button = tk.Button(checkout_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
     home_button.grid(row=9, column=0, padx=10, pady=10, sticky=tk.E)
 
-    back_button = tk.Button(checkout_frame, text="Back", command=go_back)
+    back_button = tk.Button(checkout_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
     back_button.grid(row=9, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_back():
     checkout_destroyer()
     m.mkpage(checkout_frame)
-
-    
 
 def go_home():
     checkout_destroyer()
@@ -109,7 +108,7 @@ def barcode_checker(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn.close()
 
     if not result:
-        messagebox.showerror("Barcode not found", "The entered barcode does not exist in the database.")
+        messagebox.showerror("બારકોડ મળ્યો નથી", "દાખલ કરેલો બારકોડ ડેટાબેઝમાં અસ્તિત્વમાં નથી.")
         # Clear the input fields after showing the error
         entry_barcode.delete(0, tk.END)
         entry_fir_no.delete(0, tk.END)
@@ -135,18 +134,17 @@ def already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn.close()
     if result and result[0] in ("malkhana", "Malkhana"):
         update_item_status(barcode)
-        log.update_logs(barcode, "Checked out to FSL", date, time)
-        messagebox.showinfo("Success", "Item sent to FSL successfully!")
+        log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
+        messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી કોર્ટમાં મોકલાયો ગયો!")
         addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
     else:
-        messagebox.showerror("Item not available", "The item is not available in Malkhana.")
+        messagebox.showerror("વસ્ત્ર ઉપલબ્ધ નથી", "વસ્ત્ર માલખાનામાં ઉપલબ્ધ નથી.")
         entry_barcode.delete(0, tk.END)
         entry_fir_no.delete(0, tk.END)
         entry_item_name.delete(0, tk.END)
         entry_taken_by_whom.delete(0, tk.END)
         entry_checkout_date.set_date(None)  
         entry_order_no.delete(0, tk.END)
-
 
 def addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn = sqlite3.connect("databases/fsl_records.db")

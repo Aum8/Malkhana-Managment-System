@@ -100,10 +100,10 @@ def viewfsl(prev_malkhana_frame):
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Create a button to go back to the homepage
-    back_button = tk.Button(viewfsl_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 10))
+    back_button = tk.Button(viewfsl_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewfsl_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
+    logout = tk.Button(viewfsl_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
     logout.pack(padx=12, pady=10)
 
     # Create a search entry and button

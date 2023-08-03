@@ -19,27 +19,23 @@ def mkpage(prev_homepage_frame):
     
     
     add_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ઉમેરો", command=additemsclicked, font=("Helvetica", 12))
-    add_button.pack()
     add_button.pack(pady=20)
 
     view_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ જુઓ", command=viewitemsclicked, font=("Helvetica", 12))
-    view_button.pack()
     view_button.pack(pady=20)
 
     checkin_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઇન કરો",command=checkinclicked, font=("Helvetica", 12))
-    checkin_button.pack()
     checkin_button.pack(pady=20)
 
-    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકout કરો",command=checkoutclicked, font=("Helvetica", 12))
-    checkout_button.pack()
+    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઆઉટ કરો",command=checkoutclicked, font=("Helvetica", 12))
     checkout_button.pack(pady=20)
 
 
-    logout = tk.Button(malkhanapage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
-    logout.pack(side='right', anchor=tk.NE, padx=12, pady=10)
+    logout = tk.Button(malkhanapage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout.pack(side='right', anchor=tk.NE, padx=12, pady=20)
 
-    back_button = tk.Button(malkhanapage_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 10))
-    back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
+    back_button = tk.Button(malkhanapage_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button.pack(side='right', anchor=tk.NE, padx=10,pady=20)
 
     malkhanapage_frame.mainloop()
 

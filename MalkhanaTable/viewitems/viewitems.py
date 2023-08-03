@@ -41,7 +41,7 @@ def viewitems(prev_malkhana_frame):
         "અપરાધ નિરીક્ષક",
         "વસ્તુનું અવસ્થા",
         "ક્યાં રાખી છે",
-        "attachments"
+       # "attachments"
     )
 
     # Format columns
@@ -57,7 +57,7 @@ def viewitems(prev_malkhana_frame):
     tree.column("અપરાધ નિરીક્ષક", anchor=tk.W, width=150)
     tree.column("વસ્તુનું અવસ્થા", anchor=tk.W, width=100)
     tree.column("ક્યાં રાખી છે", anchor=tk.W, width=150)
-    tree.column("attachments", anchor=tk.W, width=0)
+   # tree.column("attachments", anchor=tk.W, width=0)
 
     # Create headings
     tree.heading("#0", text="", anchor=tk.W)
@@ -72,7 +72,7 @@ def viewitems(prev_malkhana_frame):
     tree.heading("અપરાધ નિરીક્ષક", text="અપરાધ નિરીક્ષક", anchor=tk.W)
     tree.heading("વસ્તુનું અવસ્થા", text="વસ્તુનું અવસ્થા", anchor=tk.W)
     tree.heading("ક્યાં રાખી છે", text="ક્યાં રાખી છે", anchor=tk.W)
-    tree.heading("attachments", text="ક્યાં રાખી છે", anchor=tk.W)
+   # tree.heading("attachments", text="attachment_path", anchor=tk.W)
 
     # Add data to the treeview from the database
     try:
@@ -83,7 +83,8 @@ def viewitems(prev_malkhana_frame):
         cursor = conn.cursor()
 
         # Execute the SQL command to select all rows from the table
-        cursor.execute('''SELECT * FROM items ORDER BY timee DESC''')
+        cursor.execute('''SELECT barcode, fir_number, item_name, ipc_section, crime_scene, crime_date, crime_time, crime_witnesses, crime_inspector, item_status, where_its_kept
+ FROM items ORDER BY timee DESC''')
 
         # Fetch all the rows and insert them into the treeview
         for row in cursor.fetchall():
@@ -103,14 +104,14 @@ def viewitems(prev_malkhana_frame):
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Attachments Button
-    view_attachment_button = tk.Button(viewitems_frame, text="View Attachment", command=view_attachment)
+    view_attachment_button = tk.Button(viewitems_frame, text="અટેચમેન્ટ જુઓ", command=view_attachment, font=("Helvetica", 12))
     view_attachment_button.pack(pady=7)
 
     # Create a button to go back to the homepage
-    back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back)
+    back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 10))
+    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
     logout.pack(padx=12, pady=10)
 
     # Create a search entry and button
@@ -151,7 +152,7 @@ def view_attachment():
 
         # Create a new window to display the image
         image_window = tk.Toplevel(viewitems_frame)
-        image_window.title("View Attachment")
+        image_window.title("અટેચમેન્ટ જુઓ")
         image_label = tk.Label(image_window, image=photo)
         image_label.photo = photo  # Keep a reference to the PhotoImage object
         image_label.pack()

@@ -40,11 +40,11 @@ def initloginpage(prev_main_frame):
     login_frame.master.title("Login page")
     logindb.initialize_db()
     
-    label_username = ttk.Label(login_frame, text="User ID:")
-    label_password = ttk.Label(login_frame, text="Password:")
-    entry_username = ttk.Entry(login_frame)
-    entry_password = ttk.Entry(login_frame, show="*")
-    button_login = ttk.Button(login_frame, text="Login", command=check_login)
+    label_username = ttk.Label(login_frame, text="User ID:", font=("Helvetica", 12))
+    label_password = ttk.Label(login_frame, text="Password:", font=("Helvetica", 12))
+    entry_username = ttk.Entry(login_frame, font=("Helvetica", 12))
+    entry_password = ttk.Entry(login_frame, show="*", font=("Helvetica", 12))
+    button_login = tk.Button(login_frame, text="Login", command=check_login, font=("Helvetica", 12))
     
 
     label_username.grid(row=2, column=0, pady=10, sticky=tk.W)

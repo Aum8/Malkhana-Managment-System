@@ -39,7 +39,7 @@ def create_logs_page(prev_homepage_frame):
     global CL_frame
     CL_destroyer()
     CL_frame = tk.Frame(prev_homepage_frame.master)
-    CL_frame.master.title("Logs")
+    CL_frame.master.title("લોગ્સ")
     CL_frame.pack()
 
     logs_tree_frame = ttk.Frame(CL_frame)
@@ -59,10 +59,10 @@ def create_logs_page(prev_homepage_frame):
 
     logs_tree_scroll.config(command=logs_tree.yview)
 
-    logs_tree.heading("Barcode", text="Barcode")
-    logs_tree.heading("Status", text="Check-in/Check-out")
-    logs_tree.heading("Date", text="Date")
-    logs_tree.heading("Time", text="Time")
+    logs_tree.heading("Barcode", text="બારકોડ")
+    logs_tree.heading("Status", text="ચેક-ઇન/ચેક-આઉટ")
+    logs_tree.heading("Date", text="તારીખ")
+    logs_tree.heading("Time", text="સમય")
 
     logs_tree.column("Barcode", width=250, anchor=tk.CENTER)
     logs_tree.column("Status", width=250, anchor=tk.CENTER)
@@ -72,16 +72,16 @@ def create_logs_page(prev_homepage_frame):
     search_frame = ttk.Frame(CL_frame)
     search_frame.pack(pady=10, anchor=tk.S)  # Align to the bottom of CL_frame
 
-    barcode_search_label = ttk.Label(search_frame, text="Search by Barcode:")
+    barcode_search_label = ttk.Label(search_frame, text="બારકોડ દ્વારા શોધો:", font=("Helvetica", 12))
     barcode_search_label.pack(side=tk.LEFT)
 
-    barcode_search_entry = ttk.Entry(search_frame, width=20)
+    barcode_search_entry = ttk.Entry(search_frame, width=20, font=("Helvetica", 12))
     barcode_search_entry.pack(side=tk.LEFT, padx=5)
 
-    search_button = ttk.Button(search_frame, text="Search", command=lambda: search_logs_and_display(barcode_search_entry.get(), logs_tree))
+    search_button = tk.Button(search_frame, text="શોધ", command=lambda: search_logs_and_display(barcode_search_entry.get(), logs_tree), font=("Helvetica", 12))
     search_button.pack(side=tk.LEFT)
 
-    Home = tk.Button(CL_frame, text="Home", command=go_home)
+    Home = tk.Button(CL_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
     Home.pack(side=tk.LEFT, padx=10, pady=10)
 
     CL_frame.mainloop()

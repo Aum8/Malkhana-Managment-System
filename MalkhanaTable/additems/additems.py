@@ -21,34 +21,36 @@ def additems(prev_malkhana_frame):
     additems_frame.pack()
 
     # Labels
-    tk.Label(additems_frame, text="બારકોડ નંબર:").grid(row=0, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="FIR નંબર: ").grid(row=1, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="જબ્ત વસ્તુઓ:").grid(row=2, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="IPC કલમ:").grid(row=3, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="અપરાધ સ્થળ:").grid(row=4, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="અપરાધ તારીખ:").grid(row=5, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="અપરાધ સમય:").grid(row=6, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="અપરાધ સાક્ષીઓ:").grid(row=7, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="અપરાધ નિરીક્ષક:").grid(row=8, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="વસ્તુની સ્થિતિ:").grid(row=9, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="ક્યાં સંગ્રહિત છે:").grid(row=10, column=0, padx=10, pady=10)    
+    font_style = ('Helvetica', 12)
+    tk.Label(additems_frame, text="બારકોડ નંબર:",font=font_style).grid(row=0, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="FIR નંબર: ",font=font_style).grid(row=1, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="જબ્ત વસ્તુઓ:",font=font_style).grid(row=2, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="IPC કલમ:",font=font_style).grid(row=3, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="અપરાધ સ્થળ:",font=font_style).grid(row=4, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="અપરાધ તારીખ:",font=font_style).grid(row=5, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="અપરાધ સમય:",font=font_style).grid(row=6, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="અપરાધ સાક્ષીઓ:",font=font_style).grid(row=7, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="અપરાધ નિરીક્ષક:",font=font_style).grid(row=8, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="વસ્તુની સ્થિતિ:",font=font_style).grid(row=9, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="ક્યાં સંગ્રહિત છે:",font=font_style).grid(row=10, column=0, padx=10, pady=10)    
 
     # Entry Fields
-    barcode_entry = tk.Entry(additems_frame)
-    fir_number_entry = tk.Entry(additems_frame)
-    item_name_entry = tk.Entry(additems_frame)
-    ipc_section_entry = tk.Entry(additems_frame)
-    crime_scene_entry = tk.Entry(additems_frame)
-    crime_date_entry = DateEntry(additems_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
+    textbox_font = ('Helvetica', 12)
+    barcode_entry = tk.Entry(additems_frame, font=textbox_font)
+    fir_number_entry = tk.Entry(additems_frame, font=textbox_font)
+    item_name_entry = tk.Entry(additems_frame, font=textbox_font)
+    ipc_section_entry = tk.Entry(additems_frame, font=textbox_font)
+    crime_scene_entry = tk.Entry(additems_frame, font=textbox_font)
+    crime_date_entry = DateEntry(additems_frame, font=textbox_font, width=12, background='darkblue', foreground='white', borderwidth=2)
     hour_var = tk.StringVar(additems_frame, value='00')
     minute_var = tk.StringVar(additems_frame, value='00')
 
-    hour_menu = ttk.Combobox(additems_frame, textvariable=hour_var, values=[str(i).zfill(2) for i in range(24)], state='readonly', width=5)
-    minute_menu = ttk.Combobox(additems_frame, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
-    crime_witnesses_entry = tk.Entry(additems_frame)
-    crime_inspector_entry = tk.Entry(additems_frame)
-    item_status_entry = tk.Entry(additems_frame)
-    where_its_kept_entry = tk.Entry(additems_frame)
+    hour_menu = ttk.Combobox(additems_frame,font=textbox_font, textvariable=hour_var, values=[str(i).zfill(2) for i in range(24)], state='readonly', width=5)
+    minute_menu = ttk.Combobox(additems_frame, font=textbox_font, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
+    crime_witnesses_entry = tk.Entry(additems_frame, font=textbox_font)
+    crime_inspector_entry = tk.Entry(additems_frame, font=textbox_font)
+    item_status_entry = tk.Entry(additems_frame, font=textbox_font)
+    where_its_kept_entry = tk.Entry(additems_frame, font=textbox_font)
 
     # Place Entry Fields
     barcode_entry.grid(row=0, column=1, padx=10, pady=10)
@@ -64,19 +66,20 @@ def additems(prev_malkhana_frame):
     hour_menu.grid(row=6, column=1, padx=10, pady=10)  # Place the hour drop-down menu
     minute_menu.grid(row=6, column=2, padx=10, pady=10)  # Place the minute drop-down menu
 
-    add_attachment_button = tk.Button(additems_frame, text="Add Attachment", command=browse_file)
+    button_font = ('Helvetica', 12)
+    add_attachment_button = tk.Button(additems_frame, text="અટેચમેન્ટ ઉમેરો", command=browse_file,font=button_font)
     add_attachment_button.grid(row=11, column=1, padx=10, pady=10)
     
-    add_item_button = tk.Button(additems_frame, text="આઇટમ ઉમેરો", command=insert_data)
+    add_item_button = tk.Button(additems_frame, text="આઇટમ ઉમેરો", command=insert_data,font=button_font)
     add_item_button.grid(row=13, column=0, columnspan=4, padx=10, pady=10)
 
-    back_button = tk.Button(additems_frame, text="પાછા જાઓ", command=go_back)
+    back_button = tk.Button(additems_frame, text="પાછા જાઓ", command=go_back,font=button_font)
     back_button.grid(row=0, column=30, padx=42, pady=10, sticky=tk.SE)
 
-    home_button = tk.Button(additems_frame, text="હોમ", command=go_home)
+    home_button = tk.Button(additems_frame, text="હોમ", command=go_home,font=button_font)
     home_button.grid(row=0, column=32, padx=40, pady=10, sticky=tk.SE)
 
-    logout = tk.Button(additems_frame, text="લૉગઆઉટ", command=logoutclicked)
+    logout = tk.Button(additems_frame, text="લૉગઆઉટ", command=logoutclicked,font=button_font)
     logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
     additems_frame.mainloop()
