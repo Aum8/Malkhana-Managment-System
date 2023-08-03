@@ -135,19 +135,22 @@ def show_attachment(attachment_path):
     attachment_window = tk.Toplevel()
     attachment_window.title("Attachment")
     attachment_window.geometry("800x600")
-    if ai.file_entry and os.path.exists(ai.file_entry):
-        # Open and display the image in a new window
-        image = Image.open(ai.file_entry)
-        photo = ImageTk.PhotoImage(image)
 
-        # Create a new window to display the image
-        image_window = tk.Toplevel(viewitems_frame)
-        image_window.title("View Attachment")
-        image_label = tk.Label(image_window, image=photo)
-        image_label.photo = photo  # Keep a reference to the PhotoImage object
-        image_label.pack()
-    else:
-        tk.messagebox.showinfo("Error", "Attachment not found!")
+    try:
+        if os.path.exists(attachment_path):
+            # Open and display the image in a new window
+            image = Image.open(attachment_path)
+            photo = ImageTk.PhotoImage(image)
+
+            # Create a label to display the image
+            image_label = tk.Label(attachment_window, image=photo)
+            image_label.photo = photo  # Keep a reference to the PhotoImage object
+            image_label.pack()
+        else:
+            tk.messagebox.showinfo("Error", "Attachment not found!")
+    except Exception as e:
+        tk.messagebox.showinfo("Error", f"Failed to load attachment: {str(e)}")
+
 
 def go_back():
     viewitems_destroyer()
