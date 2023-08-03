@@ -98,7 +98,6 @@ def viewitems(prev_malkhana_frame):
         tk.messagebox.showerror("Error", f"Error occurred: {str(e)}")
 
     
-
     tree.pack(fill=tk.BOTH, expand=True)
     x_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)

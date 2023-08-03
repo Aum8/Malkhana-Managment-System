@@ -79,8 +79,6 @@ def additems(prev_malkhana_frame):
     logout = tk.Button(additems_frame, text="લૉગઆઉટ", command=logoutclicked)
     logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
-
-    
     additems_frame.mainloop()
     
 def insert_data():
