@@ -5,6 +5,7 @@ import FSLTable.FSLpage as fp
 import Log.log as l
 import login.login as lu
 import logger
+import print
 homepage_frame = None
 
 def open_homepage(prev_login_frame):
@@ -23,6 +24,9 @@ def open_homepage(prev_login_frame):
 
     table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, background="#FFFFFF",font=("Helvetica", 12))
     table_button.grid(row=0, column=0,pady=20)
+
+    print = tk.Button(homepage_frame, text="Print", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
+    print.grid(row=4, pady=10)
 
     log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, background="#FFFFFF",font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
@@ -51,7 +55,14 @@ def open_homepage_r(return_frame):
     log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log,background="#FFFFFF", font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
 
+    print = tk.Button(homepage_frame, text="Print", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
+    print.grid(row=4, pady=10)
+
     homepage_frame.master.title("હોમપેજ")
+
+def printDetails():
+    homepage_destroyer()
+    print.printPage(homepage_frame)
 
 def homepage_destroyer():
     if homepage_frame is not None:
