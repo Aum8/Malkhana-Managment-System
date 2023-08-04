@@ -228,7 +228,7 @@ def convert_to_english(column_name_gujarati):
         "બારકોડ": "barcode",
         "FIR નંબર": "fir_number",
         "વસ્તુનું નામ": "item_name",
-        "IPC કલમ": "ipc_column",
+        "IPC કલમ": "ipc_section",
         "અપરાધ સ્થળ": "crime_location",
         "અપરાધ તારીખ": "crime_date",
         "અપરાધ સમય": "crime_time",
