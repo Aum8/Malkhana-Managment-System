@@ -23,7 +23,7 @@ def main():
 
     # Apply the custom theme
     set_custom_theme(root)
-
+    
     main_frame = tk.Frame(root)
     main_frame.pack()
 

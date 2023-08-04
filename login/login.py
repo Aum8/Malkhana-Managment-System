@@ -4,6 +4,8 @@ from tkinter import ttk
 import login.logindb as logindb
 import home.Homepage as Homepage
 import logger as lu
+
+
 entry_password = None
 entry_username = None
 login_frame = None
@@ -48,7 +50,7 @@ def initloginpage(prev_main_frame):
     entry_username = ttk.Entry(login_frame,background="#B9E6FF", font=("Helvetica", 12))
     entry_password = ttk.Entry(login_frame, show="*",background="#B9E6FF", font=("Helvetica", 12))
     button_login = tk.Button(login_frame, text="Login", command=check_login,background="#FFFFFF", font=("Helvetica", 12))
-    
+ 
 
     label_username.grid(row=2, column=0, pady=10, sticky=tk.W)
     entry_username.grid(row=2, column=1, pady=5, sticky=tk.EW)
