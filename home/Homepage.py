@@ -15,16 +15,16 @@ def open_homepage(prev_login_frame):
     homepage_frame = tk.Frame(prev_login_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, font=("Helvetica", 12))
+    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl,background="#FFFFFF", font=("Helvetica", 12))
     FSL_button.grid(row=1, column=0,pady=20)
     
-    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, background="#FFFFFF",font=("Helvetica", 12))
     logout.grid(row=3,pady=20)
 
-    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, font=("Helvetica", 12))
+    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, background="#FFFFFF",font=("Helvetica", 12))
     table_button.grid(row=0, column=0,pady=20)
 
-    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, font=("Helvetica", 12))
+    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, background="#FFFFFF",font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
 
     homepage_frame.master.title("હોમપેજ")
@@ -39,16 +39,16 @@ def open_homepage_r(return_frame):
     homepage_frame = tk.Frame(return_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, font=("Helvetica", 12))
+    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, background="#FFFFFF",font=("Helvetica", 12))
     FSL_button.grid(row=1, column=0,pady=20)
     
-    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, background="#FFFFFF",font=("Helvetica", 12))
     logout.grid(row=3,pady=20)
 
-    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, font=("Helvetica", 12))
+    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked,background="#FFFFFF", font=("Helvetica", 12))
     table_button.grid(row=0, column=0, pady=20)
 
-    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, font=("Helvetica", 12))
+    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log,background="#FFFFFF", font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
 
     homepage_frame.master.title("હોમપેજ")

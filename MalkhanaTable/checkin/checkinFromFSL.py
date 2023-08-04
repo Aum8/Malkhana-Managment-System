@@ -38,12 +38,12 @@ def checkin_page(prev_checkin_page):
     fsl_checkin_frame.pack(fill=tk.BOTH, expand=True)  # Use pack for the fsl_checkin_frame
 
     # Labels
-    label_barcode_no = ttk.Label(fsl_checkin_frame, text="બારકોડ નંબર:", font=("Helvetica", 12))
-    label_order_no = ttk.Label(fsl_checkin_frame, text="ઓર્ડર નંબર:", font=("Helvetica", 12))
-    label_checkin_time = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન સમય:", font=("Helvetica", 12))
-    label_checkin_date = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન તારીખ:", font=("Helvetica", 12))
-    label_examiner = ttk.Label(fsl_checkin_frame, text="પરીક્ષકનું નામ:", font=("Helvetica", 12))
-    label_examiner_report = ttk.Label(fsl_checkin_frame, text="પરીક્ષક રિપોર્ટ:", font=("Helvetica", 12))
+    label_barcode_no = ttk.Label(fsl_checkin_frame, text="બારકોડ નંબર:", background="#B9E6FF", font=("Helvetica", 12))
+    label_order_no = ttk.Label(fsl_checkin_frame, text="ઓર્ડર નંબર:",  background="#B9E6FF",font=("Helvetica", 12))
+    label_checkin_time = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન સમય:", background="#B9E6FF", font=("Helvetica", 12))
+    label_checkin_date = ttk.Label(fsl_checkin_frame, text="ચેક-ઇન તારીખ:", background="#B9E6FF", font=("Helvetica", 12))
+    label_examiner = ttk.Label(fsl_checkin_frame, text="પરીક્ષકનું નામ:",  background="#B9E6FF",font=("Helvetica", 12))
+    label_examiner_report = ttk.Label(fsl_checkin_frame, text="પરીક્ષક રિપોર્ટ:",  background="#B9E6FF",font=("Helvetica", 12))
 
     label_barcode_no.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_order_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
@@ -71,21 +71,21 @@ def checkin_page(prev_checkin_page):
     entry_checkin_date = DateEntry(fsl_checkin_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
     entry_checkin_date.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)  # Use sticky=tk.W for left alignment
 
-    entry_examiner = ttk.Entry(fsl_checkin_frame, font=("Helvetica", 12))
+    entry_examiner = ttk.Entry(fsl_checkin_frame,  background="#FFFFFF",font=("Helvetica", 12))
     entry_examiner.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Text area for examiner report
-    text_examiner_report = tk.Text(fsl_checkin_frame, height=5, width=30, font=("Helvetica", 12))
+    text_examiner_report = tk.Text(fsl_checkin_frame, height=5, background="#FFFFFF", width=30, font=("Helvetica", 12))
     text_examiner_report.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)  # Use sticky=tk.W for left alignment
 
     # Check-in button
-    checkin_button = tk.Button(fsl_checkin_frame, text="ચેક-ઇન", command=checkin, font=("Helvetica", 12))
+    checkin_button = tk.Button(fsl_checkin_frame, text="ચેક-ઇન", background="#FFFFFF", command=checkin, font=("Helvetica", 12))
     checkin_button.grid(row=6, column=0, columnspan=2, padx=5, pady=10)
 
-    Home = tk.Button(fsl_checkin_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    Home = tk.Button(fsl_checkin_frame, text="હોમપેજ",  background="#FFFFFF",command=go_home, font=("Helvetica", 12))
     Home.grid(row=7, column=0, padx=10, pady=10, sticky=tk.E)
 
-    back_button = tk.Button(fsl_checkin_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(fsl_checkin_frame, text="પાછા જાઓ",  background="#FFFFFF",command=go_back, font=("Helvetica", 12))
     back_button.grid(row=7, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_home():

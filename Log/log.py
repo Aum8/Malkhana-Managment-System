@@ -72,16 +72,16 @@ def create_logs_page(prev_homepage_frame):
     search_frame = ttk.Frame(CL_frame)
     search_frame.pack(pady=10, anchor=tk.S)  # Align to the bottom of CL_frame
 
-    barcode_search_label = ttk.Label(search_frame, text="બારકોડ દ્વારા શોધો:", font=("Helvetica", 12))
+    barcode_search_label = ttk.Label(search_frame, background="#B9E6FF", text="બારકોડ દ્વારા શોધો:", font=("Helvetica", 12))
     barcode_search_label.pack(side=tk.LEFT)
 
-    barcode_search_entry = ttk.Entry(search_frame, width=20, font=("Helvetica", 12))
+    barcode_search_entry = ttk.Entry(search_frame,  background="#B9E6FF",width=20, font=("Helvetica", 12))
     barcode_search_entry.pack(side=tk.LEFT, padx=5)
 
-    search_button = tk.Button(search_frame, text="શોધ", command=lambda: search_logs_and_display(barcode_search_entry.get(), logs_tree), font=("Helvetica", 12))
+    search_button = tk.Button(search_frame, background="#FFFFFF", text="શોધ", command=lambda: search_logs_and_display(barcode_search_entry.get(), logs_tree), font=("Helvetica", 12))
     search_button.pack(side=tk.LEFT)
 
-    Home = tk.Button(CL_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    Home = tk.Button(CL_frame, text="હોમપેજ",  background="#FFFFFF",command=go_home, font=("Helvetica", 12))
     Home.pack(side=tk.LEFT, padx=10, pady=10)
 
     CL_frame.mainloop()

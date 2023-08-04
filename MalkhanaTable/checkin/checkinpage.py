@@ -14,18 +14,18 @@ def CIpage(prev_homepage_frame):
     CI_frame.master.title("ચેક ઇન")
     CI_frame.pack()
     
-    checkinFSL = tk.Button(CI_frame, text="એફ.એસ.એલ.માંથી ચેક ઇન કરો", command=fsl, font=("Helvetica", 12))
+    checkinFSL = tk.Button(CI_frame, text="FSL.માંથી ચેક ઇન કરો", background="#FFFFFF",command=fsl, font=("Helvetica", 12))
     checkinFSL.pack()
     checkinFSL.pack(pady=20)
 
-    checkinCourt = tk.Button(CI_frame, text="કોર્ટમાંથી ચેક ઇન કરો", command=court, font=("Helvetica", 12))
+    checkinCourt = tk.Button(CI_frame, text="કોર્ટમાંથી ચેક ઇન કરો",background="#FFFFFF", command=court, font=("Helvetica", 12))
     checkinCourt.pack()
     checkinCourt.pack(pady=20)
 
-    Home = tk.Button(CI_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    Home = tk.Button(CI_frame, text="હોમપેજ", command=go_home,background="#FFFFFF", font=("Helvetica", 12))
     Home.pack(side='right', anchor=tk.NE, padx=12, pady=10)
 
-    back_button = tk.Button(CI_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(CI_frame, text="પાછા જાઓ", command=go_back,background="#FFFFFF", font=("Helvetica", 12))
     back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
 
     CI_frame.mainloop()

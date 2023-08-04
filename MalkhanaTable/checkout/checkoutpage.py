@@ -14,18 +14,18 @@ def COpage(prev_homepage_frame):
     CO_frame.master.title("ચેક આઉટ​")
     CO_frame.pack()
 
-    checkoutFSL = tk.Button(CO_frame, text="ફોરેન્સિક વિભાગને ચેકઆઉટ", command=fsl, font=("Helvetica", 12))
+    checkoutFSL = tk.Button(CO_frame, text="FSL વિભાગને ચેકઆઉટ", command=fsl, background="#FFFFFF", font=("Helvetica", 12))
     checkoutFSL.pack()
     checkoutFSL.pack(pady=20)
 
-    checkoutCourt = tk.Button(CO_frame, text="કોર્ટને ચેકઆઉટ", command=court, font=("Helvetica", 12))
+    checkoutCourt = tk.Button(CO_frame, text="કોર્ટને ચેકઆઉટ", command=court, background="#FFFFFF", font=("Helvetica", 12))
     checkoutCourt.pack()
     checkoutCourt.pack(pady=20)
 
-    Home = tk.Button(CO_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    Home = tk.Button(CO_frame, text="હોમપેજ", command=go_home, background="#FFFFFF", font=("Helvetica", 12))
     Home.pack(side='right', anchor=tk.NE, padx=12, pady=10)
 
-    back_button = tk.Button(CO_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(CO_frame, text="પાછા જાઓ", command=go_back, background="#FFFFFF", font=("Helvetica", 12))
     back_button.pack(side='right', anchor=tk.NE, padx=10, pady=10)
 
     CO_frame.mainloop()

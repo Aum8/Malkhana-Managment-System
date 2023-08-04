@@ -43,13 +43,13 @@ def checkouttoFSL_page(root):
     checkout_frame.pack()
 
     # Labels
-    label_barcode = ttk.Label(checkout_frame, text="બારકોડ:", font=("Helvetica", 12))
-    label_fir_no = ttk.Label(checkout_frame, text="FIR નંબર:", font=("Helvetica", 12))
-    label_item_name = ttk.Label(checkout_frame, text="મૂદ્દામાલ નામ:", font=("Helvetica", 12))
-    label_taken_by_whom = ttk.Label(checkout_frame, text="લઈ જનાર ઓફિસર :", font=("Helvetica", 12))
-    label_checkout_date = ttk.Label(checkout_frame, text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
-    label_checkout_time = ttk.Label(checkout_frame, text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
-    label_order_no = ttk.Label(checkout_frame, text="ઓર્ડર નંબર:", font=("Helvetica", 12))
+    label_barcode = ttk.Label(checkout_frame, text="બારકોડ:",  background="#B9E6FF",font=("Helvetica", 12))
+    label_fir_no = ttk.Label(checkout_frame, text="FIR નંબર:", background="#B9E6FF", font=("Helvetica", 12))
+    label_item_name = ttk.Label(checkout_frame, text="મૂદ્દામાલ નામ:",  background="#B9E6FF",font=("Helvetica", 12))
+    label_taken_by_whom = ttk.Label(checkout_frame, text="લઈ જનાર ઓફિસર :", background="#B9E6FF", font=("Helvetica", 12))
+    label_checkout_date = ttk.Label(checkout_frame, text="ચેકઆઉટ તારીખ:", background="#B9E6FF", font=("Helvetica", 12))
+    label_checkout_time = ttk.Label(checkout_frame, text="ચેકઆઉટ સમય:",  background="#B9E6FF",font=("Helvetica", 12))
+    label_order_no = ttk.Label(checkout_frame, text="ઓર્ડર નંબર:", background="#B9E6FF", font=("Helvetica", 12))
 
     label_barcode.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_fir_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
@@ -84,14 +84,14 @@ def checkouttoFSL_page(root):
     entry_checkout_date.grid(row=7, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Checkout button
-    checkout_button = tk.Button(checkout_frame, text="FSL ને ચેકઆઉટ", command=checkouttoFSL, font=("Helvetica", 12))
+    checkout_button = tk.Button(checkout_frame, text="FSL ને ચેકઆઉટ", background="#FFFFFF", command=checkouttoFSL, font=("Helvetica", 12))
     checkout_button.grid(row=8, column=0, columnspan=2, padx=5, pady=10)
 
     # Home and Back buttons
-    home_button = tk.Button(checkout_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    home_button = tk.Button(checkout_frame, text="હોમપેજ", background="#FFFFFF", command=go_home, font=("Helvetica", 12))
     home_button.grid(row=9, column=0, padx=10, pady=10, sticky=tk.E)
 
-    back_button = tk.Button(checkout_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(checkout_frame, text="પાછા જાઓ",  background="#FFFFFF",command=go_back, font=("Helvetica", 12))
     back_button.grid(row=9, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_back():

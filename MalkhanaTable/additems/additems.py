@@ -37,21 +37,21 @@ def additems(prev_malkhana_frame):
 
     # Entry Fields
     textbox_font = ('Helvetica', 12)
-    barcode_entry = tk.Entry(additems_frame, font=textbox_font)
-    fir_number_entry = tk.Entry(additems_frame, font=textbox_font)
-    item_name_entry = tk.Entry(additems_frame, font=textbox_font)
-    ipc_section_entry = tk.Entry(additems_frame, font=textbox_font)
-    crime_scene_entry = tk.Entry(additems_frame, font=textbox_font)
+    barcode_entry = tk.Entry(additems_frame,background="#FFFFFF", font=textbox_font)
+    fir_number_entry = tk.Entry(additems_frame,background="#FFFFFF", font=textbox_font)
+    item_name_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
+    ipc_section_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
+    crime_scene_entry = tk.Entry(additems_frame,background="#FFFFFF", font=textbox_font)
     crime_date_entry = DateEntry(additems_frame, font=textbox_font, width=12, background='darkblue', foreground='white', borderwidth=2)
     hour_var = tk.StringVar(additems_frame, value='00')
     minute_var = tk.StringVar(additems_frame, value='00')
 
     hour_menu = ttk.Combobox(additems_frame,font=textbox_font, textvariable=hour_var, values=[str(i).zfill(2) for i in range(24)], state='readonly', width=5)
     minute_menu = ttk.Combobox(additems_frame, font=textbox_font, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
-    crime_witnesses_entry = tk.Entry(additems_frame, font=textbox_font)
-    crime_inspector_entry = tk.Entry(additems_frame, font=textbox_font)
+    crime_witnesses_entry = tk.Entry(additems_frame,background="#FFFFFF", font=textbox_font)
+    crime_inspector_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
     #item_status_entry = tk.Entry(additems_frame, font=textbox_font)
-    where_its_kept_entry = tk.Entry(additems_frame, font=textbox_font)
+    where_its_kept_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
 
     # Place Entry Fields
     barcode_entry.grid(row=0, column=1, padx=10, pady=10)
@@ -68,19 +68,19 @@ def additems(prev_malkhana_frame):
     minute_menu.grid(row=6, column=2, padx=10, pady=10)  # Place the minute drop-down menu
 
     button_font = ('Helvetica', 12)
-    add_attachment_button = tk.Button(additems_frame, text="અટેચમેન્ટ ઉમેરો", command=browse_file,font=button_font)
+    add_attachment_button = tk.Button(additems_frame, text="અટેચમેન્ટ ઉમેરો",background="#FFFFFF", command=browse_file,font=button_font)
     add_attachment_button.grid(row=11, column=1, padx=10, pady=10)
     
-    add_item_button = tk.Button(additems_frame, text="આઇટમ ઉમેરો", command=insert_data,font=button_font)
+    add_item_button = tk.Button(additems_frame, text="આઇટમ ઉમેરો",background="#FFFFFF", command=insert_data,font=button_font)
     add_item_button.grid(row=13, column=0, columnspan=4, padx=10, pady=10)
 
-    back_button = tk.Button(additems_frame, text="પાછા જાઓ", command=go_back,font=button_font)
+    back_button = tk.Button(additems_frame, text="પાછા જાઓ",background="#FFFFFF", command=go_back,font=button_font)
     back_button.grid(row=0, column=30, padx=42, pady=10, sticky=tk.SE)
 
-    home_button = tk.Button(additems_frame, text="હોમ", command=go_home,font=button_font)
+    home_button = tk.Button(additems_frame, text="હોમ",background="#FFFFFF", command=go_home,font=button_font)
     home_button.grid(row=0, column=32, padx=40, pady=10, sticky=tk.SE)
 
-    logout = tk.Button(additems_frame, text="લૉગઆઉટ", command=logoutclicked,font=button_font)
+    logout = tk.Button(additems_frame, text="લૉગઆઉટ",background="#FFFFFF", command=logoutclicked,font=button_font)
     logout.grid(row=0, column=34, padx=40, pady=10, sticky=tk.SE)
 
     additems_frame.mainloop()
