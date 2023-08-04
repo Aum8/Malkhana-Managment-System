@@ -157,7 +157,7 @@ def view_attachment():
         image_label.photo = photo  # Keep a reference to the PhotoImage object
         image_label.pack()
     else:
-        messagebox.showinfo("No Attachment", "No attachment found for this item.")
+        messagebox.showinfo("એટેચમેન્ટ ઉપલબ્ધ નથી")
 
 
 def go_back():
@@ -229,13 +229,13 @@ def convert_to_english(column_name_gujarati):
         "FIR નંબર": "fir_number",
         "વસ્તુનું નામ": "item_name",
         "IPC કલમ": "ipc_section",
-        "અપરાધ સ્થળ": "crime_location",
+        "અપરાધ સ્થળ": "crime_scene",
         "અપરાધ તારીખ": "crime_date",
         "અપરાધ સમય": "crime_time",
-        "અપરાધ સાક્ષીઓ": "crime_witness",
+        "અપરાધ સાક્ષીઓ": "crime_witnesses",
         "અપરાધ નિરીક્ષક": "crime_inspector",
         "વસ્તુનું અવસ્થા": "item_status",
-        "ક્યાં રાખી છે": "item_location"
+        "ક્યાં રાખી છે": "where_its_kept"
     }
 
     return gujarati_to_english.get(column_name_gujarati, column_name_gujarati)

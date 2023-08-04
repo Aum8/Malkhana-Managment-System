@@ -60,7 +60,7 @@ def checkin_page_2(root):
     minute_menu = ttk.Combobox(checkin_frame, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)],
                                state='readonly', width=5)
     hour_menu.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-    minute_menu.grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
+    minute_menu.grid(row=1, column=2, padx=1, pady=5, sticky=tk.W)
 
     # Date field using tkcalendar
     entry_checkin_date = DateEntry(checkin_frame, width=12, background='darkblue', foreground='white', borderwidth=2)

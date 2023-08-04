@@ -61,8 +61,9 @@ def checkin_page(prev_checkin_page):
 
     hour_menu = ttk.Combobox(fsl_checkin_frame, textvariable=hour_var, values=[str(i).zfill(2) for i in range(24)], state='readonly', width=5)
     minute_menu = ttk.Combobox(fsl_checkin_frame, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
-    hour_menu.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-    minute_menu.grid(row=2, column=2, padx=1, pady=5, sticky=tk.W)
+    hour_menu.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
+    minute_menu.grid(row=2, column=3, columnspan=2, padx=5, pady=5, sticky=tk.W)
+
 
     # Date field using tkcalendar
     entry_checkin_date = DateEntry(fsl_checkin_frame, width=12, background='darkblue', foreground='white', borderwidth=2)
