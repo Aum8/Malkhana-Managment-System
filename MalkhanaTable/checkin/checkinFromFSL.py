@@ -33,7 +33,7 @@ def checkin_page(prev_checkin_page):
     global fsl_checkin_frame, entry_barcode_no, entry_order_no, entry_checkin_date, hour_var, minute_var, text_examiner_report, entry_examiner
     fsL_checkin_destroyer()
     fsl_checkin_frame = tk.Frame(prev_checkin_page.master)
-    fsl_checkin_frame.master.title("ફોરેન્સિક સાયન્સ લેબથી ચેક-ઇન")
+    fsl_checkin_frame.master.title("FSLથી ચેક-ઇન")
 
     fsl_checkin_frame.pack(fill=tk.BOTH, expand=True)  # Use pack for the fsl_checkin_frame
 
@@ -131,14 +131,14 @@ def already_inornot(barcode,date,time,order_no,examiner,examiner_report):
     conn.close()
     if result and result[0] in ("fsl", "FSL"):
         update_item_status(barcode)
-        log.update_logs(barcode, "ફોરેન્સિક સાયન્સ લેબથી ચેક-ઇન", date, time)
-        messagebox.showinfo("સફળતા", "આઇટમ સફળતાપૂર્વક FSL માંથી મળ્યું છે!")
+        log.update_logs(barcode, "FSLથી ચેક-ઇન", date, time)
+        messagebox.showinfo("સફળતા", "મુદ્દામાલ સફળતાપૂર્વક FSL માંથી મળ્યું છે!")
         updatefsl(barcode,date,time,order_no,examiner,examiner_report)
         activity = "Item checked in from FSL barcode no:"+barcode
         lu.log_activity(login.current_user,activity)
         
     else:
-        messagebox.showerror("આઇટમ પહેલેથીજ ઉપલબ્ધ છે", "આ આઇટમ માલખાનામાં પહેલેથીજ ઉપલબ્ધ છે.")
+        messagebox.showerror("મુદ્દામાલ પહેલેથીજ ઉપલબ્ધ છે", "આ મુદ્દામાલ માલખાનામાં પહેલેથીજ ઉપલબ્ધ છે.")
         entry_barcode_no.delete(0, tk.END)
         entry_examiner.delete(0, tk.END)
         entry_checkin_date.set_date(None)

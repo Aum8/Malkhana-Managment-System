@@ -165,7 +165,7 @@ def insert_data():
 
 
 
-        messagebox.showinfo("Success", "Item added successfully!")
+        messagebox.showinfo("સફળતા", "મુદ્દામાલ સફળતાપૂર્વક ઉમેરવામાં આવ્યો છે!")
 
     except Exception as e:
         messagebox.showerror("Error", f"Error occurred: {str(e)}")

@@ -33,11 +33,11 @@ def viewfsl(prev_malkhana_frame):
         "FIR નંબર",
         "વસ્તુનું નામ",
         "FSL ઓર્ડર નંબર",
-        "Check-Out તારીખ",
-        "Check-Out સમય",
-        "કોણ લેવી છે",
-        "Check-In તારીખ",
-        "Check-In સમય",
+        "ચેકઆઉટ તારીખ",
+        "ચેક ઇન સમય",
+        "લઈ જનાર ઓફિસર ",
+        "ચેક ઇન તારીખ",
+        "ચેક ઇન સમય",
         "તપાસક નું નામ",
         "FSL રિપોર્ટ"
     )
@@ -48,11 +48,11 @@ def viewfsl(prev_malkhana_frame):
     tree.column("FIR નંબર", anchor=tk.W, width=100)
     tree.column("વસ્તુનું નામ", anchor=tk.W, width=150)
     tree.column("FSL ઓર્ડર નંબર", anchor=tk.W, width=100)
-    tree.column("Check-Out તારીખ", anchor=tk.W, width=100)
-    tree.column("Check-Out સમય", anchor=tk.W, width=100)
-    tree.column("કોણ લેવી છે", anchor=tk.W, width=150)
-    tree.column("Check-In તારીખ", anchor=tk.W, width=100)
-    tree.column("Check-In સમય", anchor=tk.W, width=100)
+    tree.column("ચેકઆઉટ તારીખ", anchor=tk.W, width=100)
+    tree.column("ચેકઆઉટ સમય", anchor=tk.W, width=100)
+    tree.column("લઈ જનાર ઓફિસર ", anchor=tk.W, width=150)
+    tree.column("ચેક ઇન તારીખ", anchor=tk.W, width=100)
+    tree.column("ચેક ઇન સમય", anchor=tk.W, width=100)
     tree.column("તપાસક નું નામ", anchor=tk.W, width=150)
     tree.column("FSL રિપોર્ટ", anchor=tk.W, width=100)
 
@@ -62,11 +62,11 @@ def viewfsl(prev_malkhana_frame):
     tree.heading("FIR નંબર", text="FIR નંબર", anchor=tk.W)
     tree.heading("વસ્તુનું નામ", text="વસ્તુનું નામ", anchor=tk.W)
     tree.heading("FSL ઓર્ડર નંબર", text="FSL ઓર્ડર નંબર", anchor=tk.W)
-    tree.heading("Check-Out તારીખ", text="Check-Out તારીખ", anchor=tk.W)
-    tree.heading("Check-Out સમય", text="Check-Out સમય", anchor=tk.W)
-    tree.heading("કોણ લેવી છે", text="કોણ લેવી છે", anchor=tk.W)
-    tree.heading("Check-In તારીખ", text="Check-In તારીખ", anchor=tk.W)
-    tree.heading("Check-In સમય", text="Check-In સમય", anchor=tk.W)
+    tree.heading("ચેકઆઉટ તારીખ", text="ચેકઆઉટ તારીખ", anchor=tk.W)
+    tree.heading("ચેકઆઉટ સમય", text="ચેકઆઉટ સમય", anchor=tk.W)
+    tree.heading("લઈ જનાર ઓફિસર ", text="લઈ જનાર ઓફિસર ", anchor=tk.W)
+    tree.heading("ચેક ઇન તારીખ", text="ચેક ઇન તારીખ", anchor=tk.W)
+    tree.heading("ચેક ઇન સમય", text="ચેક ઇન સમય", anchor=tk.W)
     tree.heading("તપાસક નું નામ", text="તપાસક નું નામ", anchor=tk.W)
     tree.heading("FSL રિપોર્ટ", text="FSL રિપોર્ટ", anchor=tk.W)
 
@@ -177,11 +177,11 @@ def convert_to_english(column_name_gujarati):
         "FIR નંબર": "fir_number",
         "વસ્તુનું નામ": "item_name",
         "FSL ઓર્ડર નંબર": "fsl_order_no",
-        "Check-Out તારીખ": "checkout_date",
-        "Check-Out સમય": "checkout_time",
+        "ચેકઆઉટ તારીખ": "checkout_date",
+        "ચેકઆઉટ સમય": "checkout_time",
         "કોણ લેવી છે": "taken_by_whom",
-        "Check-In તારીખ": "checkin_date",
-        "Check-In સમય": "checkin_time",
+        "ચેક ઇન તારીખ": "checkin_date",
+        "ચેક ઇન સમય": "checkin_time",
         "તપાસક નું નામ": "examiner_name",
         "FSL રિપોર્ટ": "fsl_report"
     }

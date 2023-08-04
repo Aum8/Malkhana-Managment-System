@@ -11,7 +11,7 @@ def COpage(prev_homepage_frame):
     global CO_frame
     checkout_page_destroyer()
     CO_frame = tk.Frame(prev_homepage_frame.master)
-    CO_frame.master.title("ચેક ઇન")
+    CO_frame.master.title("ચેક આઉટ​")
     CO_frame.pack()
 
     checkoutFSL = tk.Button(CO_frame, text="ફોરેન્સિક વિભાગને ચેકઆઉટ", command=fsl, font=("Helvetica", 12))

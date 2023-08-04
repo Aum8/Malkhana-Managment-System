@@ -34,7 +34,7 @@ def checkin():
 def checkin_page_2(root):
     global checkin_frame, entry_barcode_no, entry_checkin_date, hour_var, minute_var, text_order_details
     checkin_frame = tk.Frame(root.master)
-    checkin_frame.master.title("પરીક્ષક ચેક-ઇન")
+    checkin_frame.master.title("કોર્ટ માથી ચેક-ઇન")
 
     checkin_frame.pack(fill=tk.BOTH, expand=True)  # Use pack for the checkin_frame
 
@@ -121,11 +121,11 @@ def already_in_or_not(barcode, date, time):
     if result and result[0] in ("court", "Court"):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાંથી ચેક-ઇન", date, time)
-        messagebox.showinfo("સફળતા", "આઇટમ સફળતાથી માળખાનામાં પ્રાપ્ત કરવામાં આવ્યો છે!")
+        messagebox.showinfo("સફળતા", "મુદ્દામાલ સફળતાથી માલખાનામાં પ્રાપ્ત કરવામાં આવ્યો છે!")
         activity = "Item checked in from Court barcode no:"+barcode
         lu.log_activity(login.current_user,activity)
     else:
-        messagebox.showerror("આઇટમ પહેલેથીજ માળખાનામાં છે", "આઇટમ પહેલેથીજ માળખાનામાં છે.")
+        messagebox.showerror("મુદ્દામાલ પહેલેથીજ માલખાના છે", "મુદ્દામાલ પહેલેથીજ માલખાના છે.")
         entry_barcode_no.delete(0, tk.END)
         entry_checkin_date.set_date(None)  # Clear the date entry
         text_order_details.delete("1.0", tk.END)

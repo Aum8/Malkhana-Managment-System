@@ -45,8 +45,8 @@ def checkouttoFSL_page(root):
     # Labels
     label_barcode = ttk.Label(checkout_frame, text="બારકોડ:", font=("Helvetica", 12))
     label_fir_no = ttk.Label(checkout_frame, text="FIR નંબર:", font=("Helvetica", 12))
-    label_item_name = ttk.Label(checkout_frame, text="વસ્ત્રનું નામ:", font=("Helvetica", 12))
-    label_taken_by_whom = ttk.Label(checkout_frame, text="કોણે લેવું છે:", font=("Helvetica", 12))
+    label_item_name = ttk.Label(checkout_frame, text="મૂદ્દામાલ નામ:", font=("Helvetica", 12))
+    label_taken_by_whom = ttk.Label(checkout_frame, text="લઈ જનાર ઓફિસર :", font=("Helvetica", 12))
     label_checkout_date = ttk.Label(checkout_frame, text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
     label_checkout_time = ttk.Label(checkout_frame, text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
     label_order_no = ttk.Label(checkout_frame, text="ઓર્ડર નંબર:", font=("Helvetica", 12))
@@ -137,12 +137,12 @@ def already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     if result and result[0] in ("malkhana", "Malkhana"):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
-        messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી FSL માં મોકલાયો ગયો!")
+        messagebox.showinfo("સફળતા", "મુદ્દામાલ સફળતાથી FSL માં મોકલ્યો છે!")
         addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
         activity = "Item checked out to FSL barcode no:"+barcode
         lu.log_activity(login.current_user,activity)
     else:
-        messagebox.showerror("વસ્ત્ર ઉપલબ્ધ નથી", "વસ્ત્ર માલખાનામાં ઉપલબ્ધ નથી.")
+        messagebox.showerror("મુદ્દામાલ ઉપલબ્ધ નથી", "મુદ્દામાલ માલખાનામાં ઉપલબ્ધ નથી.")
         entry_barcode.delete(0, tk.END)
         entry_fir_no.delete(0, tk.END)
 
