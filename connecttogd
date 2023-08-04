@@ -1,0 +1,66 @@
+import tkinter as tk
+from googleapiclient.discovery import build
+from google.oauth2.credentials import Credentials
+
+# Replace with your credentials JSON file path
+credentials_file = 'path/to/credentials.json'
+
+# Function to authenticate and create the API service
+def create_drive_service():
+    if not os.path.exists(credentials_file):
+        raise FileNotFoundError(f"Credentials file not found at '{credentials_file}'")
+
+    creds = credentials.Credentials.from_authorized_user_file(credentials_file, scopes=['https://www.googleapis.com/auth/drive'])
+    service = build('drive', 'v3', credentials=creds)
+    return service
+    
+drive_service = create_drive_service()
+
+# Function to upload data to Google Drive
+def upload_to_drive(file_name, content):
+    service = create_drive_service()
+    file_metadata = {'name': file_name}
+    media = MediaFileUpload(file_name, mimetype='text/plain')
+    file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+    return file.get('id')
+
+# Function to download data from Google Drive
+def download_from_drive(file_id, destination):
+    service = create_drive_service()
+    request = service.files().get_media(fileId=file_id)
+    fh = io.BytesIO()
+    downloader = MediaIoBaseDownload(fh, request)
+    done = False
+    while done is False:
+        status, done = downloader.next_chunk()
+    with open(destination, 'wb') as f:
+        f.write(fh.getvalue())
+
+# tkinter application
+class MyDatabaseApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title('Google Drive Database')
+
+        # Create widgets and layout here
+        self.upload_button = tk.Button(self.root, text='Upload Data', command=self.upload_data)
+        self.upload_button.pack()
+
+        self.download_button = tk.Button(self.root, text='Download Data', command=self.download_data)
+        self.download_button.pack()
+
+    def upload_data(self):
+        # Get data from tkinter widgets and call upload_to_drive()
+        data_to_upload = "Sample data to upload"
+        file_id = upload_to_drive('data.txt', data_to_upload)
+        # Save the file_id or update a database with it, if necessary
+
+    def download_data(self):
+        # Retrieve the file_id from the database or user input
+        file_id = "your_file_id_here"
+        download_from_drive(file_id, 'downloaded_data.txt')
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = MyDatabaseApp(root)
+    root.mainloop()
