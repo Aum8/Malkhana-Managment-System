@@ -10,6 +10,7 @@ from PIL import Image, ImageTk
 import os
 import MalkhanaTable.additems.additems as ai
 import io
+import logger as lu
 
 viewitems_frame = None
 
@@ -172,6 +173,8 @@ def go_home():
     homepage.open_homepage_r(viewitems_frame)
 
 def logoutclicked():
+    activity = "LOG-OUT"
+    lu.log_activity(login.current_user,activity)
     viewitems_destroyer()
     login.initloginpage(viewitems_frame)
 

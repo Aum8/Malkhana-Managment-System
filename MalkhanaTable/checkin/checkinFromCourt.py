@@ -7,13 +7,14 @@ from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
 from tkinter import messagebox
-
+import login.login as login
+import logger as lu
 checkin_frame = None
 
 def update_item_status(barcode):
     conn = sqlite3.connect('databases/items_in_malkhana.db')
     cursor = conn.cursor()
-    cursor.execute("UPDATE items SET item_status='માળખાના' where barcode = ?", (barcode,))
+    cursor.execute("UPDATE items SET item_status='malkhana' where barcode = ?", (barcode,))
     conn.commit()
     conn.close()
 
@@ -121,6 +122,8 @@ def already_in_or_not(barcode, date, time):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાંથી ચેક-ઇન", date, time)
         messagebox.showinfo("સફળતા", "આઇટમ સફળતાથી માળખાનામાં પ્રાપ્ત કરવામાં આવ્યો છે!")
+        activity = "Item checked in from Court barcode no:"+barcode
+        lu.log_activity(login.current_user,activity)
     else:
         messagebox.showerror("આઇટમ પહેલેથીજ માળખાનામાં છે", "આઇટમ પહેલેથીજ માળખાનામાં છે.")
         entry_barcode_no.delete(0, tk.END)

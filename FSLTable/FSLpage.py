@@ -6,7 +6,7 @@ from tkinter import ttk
 import home.Homepage as homepage
 import MalkhanaTable.MalkhanaPage as m
 import login.login as login
-
+import logger as lu
 viewfsl_frame = None
 
 def viewfsl(prev_malkhana_frame):
@@ -200,6 +200,8 @@ def go_home():
     homepage.open_homepage_r(viewfsl_frame)
 
 def logoutclicked():
+    activity = "LOG-OUT"
+    lu.log_activity(login.current_user,activity)
     fsl_destroyer()
     login.initloginpage(viewfsl_frame)
   # For testing the viewfsl function

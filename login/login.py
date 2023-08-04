@@ -3,18 +3,21 @@ from tkinter import messagebox
 from tkinter import ttk
 import login.logindb as logindb
 import home.Homepage as Homepage
-
+import logger as lu
 entry_password = None
 entry_username = None
 login_frame = None
 
 def check_login():
     global login_frame 
+    global current_user
     username = entry_username.get()
     password = entry_password.get()
 
     if logindb.check_credentials(username, password):
         messagebox.showinfo("Success", "Login successful!")
+        current_user = username
+        lu.log_activity(username,"LOG-IN")
         Homepage.open_homepage(login_frame)
     else:
         messagebox.showerror("Error", "Wrong username or password")

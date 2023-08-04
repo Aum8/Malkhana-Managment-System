@@ -8,6 +8,8 @@ from tkinter import messagebox
 import sqlite3
 from tkcalendar import DateEntry
 import datetime
+import logger as lu
+import login.login as login
 checkout_frame = None
 
 def update_item_status(barcode):
@@ -37,7 +39,7 @@ def checkouttoFSL_page(root):
     global checkout_frame, entry_barcode, entry_fir_no, entry_item_name, entry_taken_by_whom, entry_checkout_date, hour_var, minute_var, entry_order_no
     checkout_destroyer()
     checkout_frame = tk.Frame(root.master)
-    checkout_frame.master.title("કોર્ટને ચેકઆઉટ")
+    checkout_frame.master.title("FSL ને ચેકઆઉટ")
     checkout_frame.pack()
 
     # Labels
@@ -82,7 +84,7 @@ def checkouttoFSL_page(root):
     entry_checkout_date.grid(row=7, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Checkout button
-    checkout_button = tk.Button(checkout_frame, text="કોર્ટને ચેકઆઉટ", command=checkouttoFSL, font=("Helvetica", 12))
+    checkout_button = tk.Button(checkout_frame, text="FSL ને ચેકઆઉટ", command=checkouttoFSL, font=("Helvetica", 12))
     checkout_button.grid(row=8, column=0, columnspan=2, padx=5, pady=10)
 
     # Home and Back buttons
@@ -135,12 +137,16 @@ def already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     if result and result[0] in ("malkhana", "Malkhana"):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
-        messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી કોર્ટમાં મોકલાયો ગયો!")
+        messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી FSL માં મોકલાયો ગયો!")
         addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
+        activity = "Item checked out to FSL barcode no:"+barcode
+        lu.log_activity(login.current_user,activity)
     else:
         messagebox.showerror("વસ્ત્ર ઉપલબ્ધ નથી", "વસ્ત્ર માલખાનામાં ઉપલબ્ધ નથી.")
         entry_barcode.delete(0, tk.END)
         entry_fir_no.delete(0, tk.END)
+
+        
         entry_item_name.delete(0, tk.END)
         entry_taken_by_whom.delete(0, tk.END)
         entry_checkout_date.set_date(None)  

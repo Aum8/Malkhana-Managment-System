@@ -3,6 +3,8 @@ import login.login as login
 import MalkhanaTable.MalkhanaPage as mk
 import FSLTable.FSLpage as fp
 import Log.log as l
+import login.login as lu
+import logger
 homepage_frame = None
 
 def open_homepage(prev_login_frame):
@@ -56,6 +58,7 @@ def homepage_destroyer():
         homepage_frame.destroy()
 
 def logoutclicked():
+    logger.log_activity(lu.current_user,"LOG-OUT")
     homepage_destroyer()
     login.initloginpage(homepage_frame)
 

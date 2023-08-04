@@ -8,6 +8,7 @@ import MalkhanaTable.MalkhanaPage as m
 import login.login as login
 from tkinter import filedialog
 import datetime
+import logger as lu
 additems_frame = None
 
 def additems(prev_malkhana_frame):
@@ -31,8 +32,8 @@ def additems(prev_malkhana_frame):
     tk.Label(additems_frame, text="અપરાધ સમય:",font=font_style).grid(row=6, column=0, padx=10, pady=10)
     tk.Label(additems_frame, text="અપરાધ સાક્ષીઓ:",font=font_style).grid(row=7, column=0, padx=10, pady=10)
     tk.Label(additems_frame, text="અપરાધ નિરીક્ષક:",font=font_style).grid(row=8, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="વસ્તુની સ્થિતિ:",font=font_style).grid(row=9, column=0, padx=10, pady=10)
-    tk.Label(additems_frame, text="ક્યાં સંગ્રહિત છે:",font=font_style).grid(row=10, column=0, padx=10, pady=10)    
+    #tk.Label(additems_frame, text="વસ્તુની સ્થિતિ:",font=font_style).grid(row=9, column=0, padx=10, pady=10)
+    tk.Label(additems_frame, text="ક્યાં સંગ્રહિત છે:",font=font_style).grid(row=9, column=0, padx=10, pady=10)    
 
     # Entry Fields
     textbox_font = ('Helvetica', 12)
@@ -49,7 +50,7 @@ def additems(prev_malkhana_frame):
     minute_menu = ttk.Combobox(additems_frame, font=textbox_font, textvariable=minute_var, values=[str(i).zfill(2) for i in range(60)], state='readonly', width=5)
     crime_witnesses_entry = tk.Entry(additems_frame, font=textbox_font)
     crime_inspector_entry = tk.Entry(additems_frame, font=textbox_font)
-    item_status_entry = tk.Entry(additems_frame, font=textbox_font)
+    #item_status_entry = tk.Entry(additems_frame, font=textbox_font)
     where_its_kept_entry = tk.Entry(additems_frame, font=textbox_font)
 
     # Place Entry Fields
@@ -61,8 +62,8 @@ def additems(prev_malkhana_frame):
     crime_date_entry.grid(row=5, column=1, padx=10, pady=10)
     crime_witnesses_entry.grid(row=7, column=1, padx=10, pady=10)
     crime_inspector_entry.grid(row=8, column=1, padx=10, pady=10)
-    item_status_entry.grid(row=9, column=1, padx=10, pady=10)
-    where_its_kept_entry.grid(row=10, column=1, padx=10, pady=10)
+   # item_status_entry.grid(row=9, column=1, padx=10, pady=10)
+    where_its_kept_entry.grid(row=9, column=1, padx=10, pady=10)
     hour_menu.grid(row=6, column=1, padx=10, pady=10)  # Place the hour drop-down menu
     minute_menu.grid(row=6, column=2, padx=10, pady=10)  # Place the minute drop-down menu
 
@@ -95,7 +96,7 @@ def insert_data():
     crime_date = crime_date_entry.get()
     crime_witnesses = crime_witnesses_entry.get()
     crime_inspector = crime_inspector_entry.get()
-    item_status = item_status_entry.get()
+    #item_status = item_status_entry.get()
     where_its_kept = where_its_kept_entry.get()
     
     crime_hour = int(hour_var.get())
@@ -136,6 +137,7 @@ def insert_data():
                             attachments BLOB
                         );''')
         timee = datetime.datetime.now()
+        item_status = "malkhana"
         # Execute the SQL command to insert data into the table
         cursor.execute('''INSERT INTO items (barcode,fir_number, item_name, ipc_section, 
                           crime_scene, crime_date, crime_time, crime_witnesses, 
@@ -147,7 +149,8 @@ def insert_data():
         # Commit the changes
         conn.commit()
         conn.close()
-
+        activity = "Added item barcode no: "+barcode
+        lu.log_activity(login.current_user,activity)
         # Clear the entry fields
         barcode_entry.delete(0, tk.END)
         fir_number_entry.delete(0, tk.END)
@@ -157,7 +160,6 @@ def insert_data():
         crime_date_entry.delete(0, tk.END)
         crime_witnesses_entry.delete(0, tk.END)
         crime_inspector_entry.delete(0, tk.END)
-        item_status_entry.delete(0, tk.END)
         where_its_kept_entry.delete(0, tk.END)
 
 
@@ -201,6 +203,8 @@ def go_home():
     Homepage.open_homepage_r(additems_frame)
 
 def logoutclicked():
+    activity = "LOG-OUT"
+    lu.log_activity(login.current_user,activity)
     additems_destroyer()
     login.initloginpage(additems_frame)
 

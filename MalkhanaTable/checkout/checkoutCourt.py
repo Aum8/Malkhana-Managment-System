@@ -7,6 +7,8 @@ from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
 from tkinter import messagebox
+import login.login as login 
+import logger as lu
 
 checkout_frame = None
 
@@ -137,6 +139,8 @@ def already_outornot(barcode,date,time):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
         messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી કોર્ટમાં મોકલાયો ગયો!")
+        activity = "Item checked out to Court barcode no:"+barcode
+        lu.log_activity(login.current_user,activity)
     else:
         messagebox.showerror("વસ્ત્ર ઉપલબ્ધ નથી", "વસ્ત્ર માલખાનામાં ઉપલબ્ધ નથી.")
         entry_barcode.delete(0, tk.END)

@@ -24,11 +24,13 @@ def mkpage(prev_homepage_frame):
     view_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ જુઓ", command=viewitemsclicked, font=("Helvetica", 12))
     view_button.pack(pady=20)
 
+    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઆઉટ કરો",command=checkoutclicked, font=("Helvetica", 12))
+    checkout_button.pack(pady=20)
+
     checkin_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઇન કરો",command=checkinclicked, font=("Helvetica", 12))
     checkin_button.pack(pady=20)
 
-    checkout_button = tk.Button(malkhanapage_frame, text="વસ્તુઓ ચેકઆઉટ કરો",command=checkoutclicked, font=("Helvetica", 12))
-    checkout_button.pack(pady=20)
+    
 
 
     logout = tk.Button(malkhanapage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))

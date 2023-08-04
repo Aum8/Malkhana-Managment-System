@@ -7,6 +7,8 @@ from tkinter import messagebox
 from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
+import logger as lu
+import login.login as login
 
 fsl_checkin_frame = None
 
@@ -132,6 +134,8 @@ def already_inornot(barcode,date,time,order_no,examiner,examiner_report):
         log.update_logs(barcode, "ફોરેન્સિક સાયન્સ લેબથી ચેક-ઇન", date, time)
         messagebox.showinfo("સફળતા", "આઇટમ સફળતાપૂર્વક FSL માંથી મળ્યું છે!")
         updatefsl(barcode,date,time,order_no,examiner,examiner_report)
+        activity = "Item checked in from FSL barcode no:"+barcode
+        lu.log_activity(login.current_user,activity)
         
     else:
         messagebox.showerror("આઇટમ પહેલેથીજ ઉપલબ્ધ છે", "આ આઇટમ માલખાનામાં પહેલેથીજ ઉપલબ્ધ છે.")
