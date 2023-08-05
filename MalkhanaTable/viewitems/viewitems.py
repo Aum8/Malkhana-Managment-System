@@ -105,7 +105,7 @@ def viewitems(prev_malkhana_frame):
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Attachments Button
-    view_attachment_button = tk.Button(viewitems_frame, text="અટેચમેન્ટ જુઓ", command=view_attachment, font=("Helvetica", 12))
+    view_attachment_button = tk.Button(viewitems_frame, background="#FFFFFF", text="અટેચમેન્ટ જુઓ", command=view_attachment, font=("Helvetica", 12))
     view_attachment_button.pack(pady=7)
 
     # Create a button to go back to the homepage
@@ -117,7 +117,7 @@ def viewitems(prev_malkhana_frame):
 
     # Create a search entry and button
     search_var = tk.StringVar()
-    search_entry = tk.Entry(viewitems_frame, textvariable=search_var)
+    search_entry = tk.Entry(viewitems_frame, background="#FFFFFF",textvariable=search_var)
     search_entry.pack(pady=5)
 
     # Create a dropdown menu for selecting search field
