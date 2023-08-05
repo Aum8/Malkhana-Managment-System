@@ -14,7 +14,7 @@ def printPage(prev_malkhana_frame):
     print_frame.master.title("Print Details")
     print_frame.pack(fill=tk.BOTH, expand=True)  # To occupy the whole screen
     
-    search_label = tk.Label(print_frame, text="Search by Barcode:")
+    search_label = tk.Label(print_frame, text="Search by Barcode:",font=12)
     search_label.pack(pady=5)
     
     search_entry = tk.Entry(print_frame,  background="#FFFFFF")
