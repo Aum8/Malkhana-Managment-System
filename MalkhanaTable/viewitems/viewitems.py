@@ -117,7 +117,7 @@ def viewitems(prev_malkhana_frame):
 
     # Create a search entry and button
     search_var = tk.StringVar()
-    search_entry = tk.Entry(viewitems_frame, textvariable=search_var)
+    search_entry = tk.Entry(viewitems_frame, background="#FFFFFF",textvariable=search_var)
     search_entry.pack(pady=5)
 
     # Create a dropdown menu for selecting search field
