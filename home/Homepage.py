@@ -25,7 +25,7 @@ def open_homepage(prev_login_frame):
     table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, background="#FFFFFF",font=("Helvetica", 12))
     table_button.grid(row=0, column=0,pady=20)
 
-    print = tk.Button(homepage_frame, text="Print", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
+    print = tk.Button(homepage_frame, text="પ્રિન્ટ", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
     print.grid(row=4, pady=10)
 
     log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, background="#FFFFFF",font=("Helvetica", 12))

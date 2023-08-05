@@ -14,13 +14,13 @@ def printPage(prev_malkhana_frame):
     print_frame.master.title("Print Details")
     print_frame.pack(fill=tk.BOTH, expand=True)  # To occupy the whole screen
     
-    search_label = tk.Label(print_frame, text="Search by Barcode:",font=12)
+    search_label = tk.Label(print_frame, text="બારકોડ:",font=("Helvetica", 12))
     search_label.pack(pady=5)
     
     search_entry = tk.Entry(print_frame,  background="#FFFFFF")
     search_entry.pack(pady=5)
     
-    print_button = tk.Button(print_frame, text="Print",  background="#FFFFFF", command=lambda: print_details(search_entry.get()))
+    print_button = tk.Button(print_frame, text="પ્રિન્ટ",  background="#FFFFFF", command=lambda: print_details(search_entry.get()))
     print_button.pack(pady=5)
 
     Home = tk.Button(print_frame, text="હોમપેજ",  background="#FFFFFF",command=go_home, font=("Helvetica", 12))
