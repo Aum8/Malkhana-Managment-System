@@ -17,12 +17,12 @@ def check_login():
     password = entry_password.get()
 
     if logindb.check_credentials(username, password):
-        messagebox.showinfo("Success", "Login successful!")
+        messagebox.showinfo("સફળતા", "લૉગિન સફળ!")
         current_user = username
         lu.log_activity(username,"LOG-IN")
         Homepage.open_homepage(login_frame)
     else:
-        messagebox.showerror("Error", "Wrong username or password")
+        messagebox.showerror("ભૂલ", "ખોટું યૂઝર આઈડી અથવા પાસવર્ડ")
 
 def initloginpage(prev_main_frame):
     prev_main_frame.destroy()
@@ -38,18 +38,17 @@ def initloginpage(prev_main_frame):
     style.theme_use('alt')
 
     label_heading = ttk.Label(login_frame, text="માલખાના મેનેજમેન્ટ સિસ્ટમ", anchor=tk.W, background="#B9E6FF", font=("Verdana", 30))
-    label_station = ttk.Label(login_frame, text="ગોત્રી પોલીસ સ્ટેશન", anchor=tk.CENTER, background="#B9E6FF", font=("Verdana", 30))
     label_heading.grid(row=0, column=0, columnspan=2, pady=(0, 5), sticky=tk.W)
-    label_station.grid(row=1, column=0, columnspan=2, pady=(0, 50), sticky="ew")
+   
 
-    login_frame.master.title("Login page")
+    login_frame.master.title("લૉગિન પેજ")
     logindb.initialize_db()
     
     label_username = ttk.Label(login_frame, text="યૂઝર આઈડી:",background="#B9E6FF", font=("Helvetica", 12))
-    label_password = ttk.Label(login_frame, text="Password:",background="#B9E6FF", font=("Helvetica", 12))
+    label_password = ttk.Label(login_frame, text="પાસવર્ડ",background="#B9E6FF", font=("Helvetica", 12))
     entry_username = ttk.Entry(login_frame,background="#B9E6FF", font=("Helvetica", 12))
     entry_password = ttk.Entry(login_frame, show="*",background="#B9E6FF", font=("Helvetica", 12))
-    button_login = tk.Button(login_frame, text="Login", command=check_login,background="#FFFFFF", font=("Helvetica", 12))
+    button_login = tk.Button(login_frame, text="પ્રવેશ કરો", command=check_login,background="#FFFFFF", font=("Helvetica", 12))
  
 
     label_username.grid(row=2, column=0, pady=10, sticky=tk.W)
