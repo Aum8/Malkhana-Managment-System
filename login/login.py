@@ -45,7 +45,7 @@ def initloginpage(prev_main_frame):
     login_frame.master.title("Login page")
     logindb.initialize_db()
     
-    label_username = ttk.Label(login_frame, text="User ID:",background="#B9E6FF", font=("Helvetica", 12))
+    label_username = ttk.Label(login_frame, text="યૂઝર આઈડી:",background="#B9E6FF", font=("Helvetica", 12))
     label_password = ttk.Label(login_frame, text="Password:",background="#B9E6FF", font=("Helvetica", 12))
     entry_username = ttk.Entry(login_frame,background="#B9E6FF", font=("Helvetica", 12))
     entry_password = ttk.Entry(login_frame, show="*",background="#B9E6FF", font=("Helvetica", 12))
