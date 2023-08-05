@@ -105,7 +105,7 @@ def viewitems(prev_malkhana_frame):
     y_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Attachments Button
-    view_attachment_button = tk.Button(viewitems_frame, text="અટેચમેન્ટ જુઓ", command=view_attachment, font=("Helvetica", 12))
+    view_attachment_button = tk.Button(viewitems_frame, background="#FFFFFF", text="અટેચમેન્ટ જુઓ", command=view_attachment, font=("Helvetica", 12))
     view_attachment_button.pack(pady=7)
 
     # Create a button to go back to the homepage
