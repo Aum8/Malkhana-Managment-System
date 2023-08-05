@@ -7,6 +7,8 @@ from tkinter import ttk
 import sqlite3
 from tkcalendar import DateEntry
 from tkinter import messagebox
+import login.login as login 
+import logger as lu
 
 checkout_frame = None
 
@@ -47,12 +49,12 @@ def checkouttocourt_page(root):
     checkout_frame.pack()
 
     # Labels
-    label_barcode = ttk.Label(checkout_frame, text="બારકોડ:", font=("Helvetica", 12))
-    label_fir_no = ttk.Label(checkout_frame, text="FIR નંબર:", font=("Helvetica", 12))
-    label_item_name = ttk.Label(checkout_frame, text="વસ્ત્રનું નામ:", font=("Helvetica", 12))
-    label_taken_by_whom = ttk.Label(checkout_frame, text="કોણે લેવું છે:", font=("Helvetica", 12))
-    label_checkout_date = ttk.Label(checkout_frame, text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
-    label_checkout_time = ttk.Label(checkout_frame, text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
+    label_barcode = ttk.Label(checkout_frame, background="#B9E6FF", text="બારકોડ:", font=("Helvetica", 12))
+    label_fir_no = ttk.Label(checkout_frame, background="#B9E6FF", text="FIR નંબર:", font=("Helvetica", 12))
+    label_item_name = ttk.Label(checkout_frame, background="#B9E6FF", text="વસ્ત્રનું નામ:", font=("Helvetica", 12))
+    label_taken_by_whom = ttk.Label(checkout_frame,  background="#B9E6FF",text="લઈ જનાર ઓફિસર :", font=("Helvetica", 12))
+    label_checkout_date = ttk.Label(checkout_frame, background="#B9E6FF", text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
+    label_checkout_time = ttk.Label(checkout_frame, background="#B9E6FF", text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
 
     label_barcode.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     label_fir_no.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
@@ -84,14 +86,14 @@ def checkouttocourt_page(root):
     entry_checkout_date.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
 
     # Checkout button
-    checkout_button = tk.Button(checkout_frame, text="કોર્ટને ચેકઆઉટ કરો", command=checkouttocourt, font=("Helvetica", 12))
+    checkout_button = tk.Button(checkout_frame, text="કોર્ટને ચેકઆઉટ કરો", background="#FFFFFF", command=checkouttocourt, font=("Helvetica", 12))
     checkout_button.grid(row=6, column=0, columnspan=2, padx=5, pady=10)
 
     # Home and Back buttons
-    home_button = tk.Button(checkout_frame, text="હોમપેજ", command=go_home, font=("Helvetica", 12))
+    home_button = tk.Button(checkout_frame, text="હોમપેજ", background="#FFFFFF", command=go_home, font=("Helvetica", 12))
     home_button.grid(row=7, column=0, padx=10, pady=10, sticky=tk.E)
 
-    back_button = tk.Button(checkout_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(checkout_frame, text="પાછા જાઓ", background="#FFFFFF", command=go_back, font=("Helvetica", 12))
     back_button.grid(row=7, column=1, padx=10, pady=10, sticky=tk.W)
 
 def go_back():
@@ -136,9 +138,11 @@ def already_outornot(barcode,date,time):
     if result and result[0] in ("malkhana", "Malkhana"):
         update_item_status(barcode)
         log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
-        messagebox.showinfo("સફળતા", "વસ્ત્ર સફળતાથી કોર્ટમાં મોકલાયો ગયો!")
+        messagebox.showinfo("સફળતા", "મૂદ્દામાલ સફળતાથી કોર્ટમાં મોકલ્યો છે!")
+        activity = "Item checked out to Court barcode no:"+barcode
+        lu.log_activity(login.current_user,activity)
     else:
-        messagebox.showerror("વસ્ત્ર ઉપલબ્ધ નથી", "વસ્ત્ર માલખાનામાં ઉપલબ્ધ નથી.")
+        messagebox.showerror("મૂદ્દામાલ ઉપલબ્ધ નથી", "મૂદ્દામાલ માલખાનામાં ઉપલબ્ધ નથી.")
         entry_barcode.delete(0, tk.END)
         entry_fir_no.delete(0, tk.END)
         entry_item_name.delete(0, tk.END)

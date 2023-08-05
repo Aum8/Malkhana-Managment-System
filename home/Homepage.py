@@ -3,6 +3,9 @@ import login.login as login
 import MalkhanaTable.MalkhanaPage as mk
 import FSLTable.FSLpage as fp
 import Log.log as l
+import login.login as lu
+import logger
+import print
 homepage_frame = None
 
 def open_homepage(prev_login_frame):
@@ -13,16 +16,19 @@ def open_homepage(prev_login_frame):
     homepage_frame = tk.Frame(prev_login_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, font=("Helvetica", 12))
+    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl,background="#FFFFFF", font=("Helvetica", 12))
     FSL_button.grid(row=1, column=0,pady=20)
     
-    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, background="#FFFFFF",font=("Helvetica", 12))
     logout.grid(row=3,pady=20)
 
-    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, font=("Helvetica", 12))
+    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, background="#FFFFFF",font=("Helvetica", 12))
     table_button.grid(row=0, column=0,pady=20)
 
-    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, font=("Helvetica", 12))
+    print = tk.Button(homepage_frame, text="પ્રિન્ટ", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
+    print.grid(row=4, pady=10)
+
+    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, background="#FFFFFF",font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
 
     homepage_frame.master.title("હોમપેજ")
@@ -37,25 +43,33 @@ def open_homepage_r(return_frame):
     homepage_frame = tk.Frame(return_frame.master)
     homepage_frame.pack()
 
-    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, font=("Helvetica", 12))
+    FSL_button = tk.Button(homepage_frame, text="એફએસએલ લોગ", command=fsl, background="#FFFFFF",font=("Helvetica", 12))
     FSL_button.grid(row=1, column=0,pady=20)
     
-    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout = tk.Button(homepage_frame, text="લૉગઆઉટ", command=logoutclicked, background="#FFFFFF",font=("Helvetica", 12))
     logout.grid(row=3,pady=20)
 
-    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked, font=("Helvetica", 12))
+    table_button = tk.Button(homepage_frame, text="માલખાના", command=clicked,background="#FFFFFF", font=("Helvetica", 12))
     table_button.grid(row=0, column=0, pady=20)
 
-    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log, font=("Helvetica", 12))
+    log_button = tk.Button(homepage_frame, text="લોગ્સ", command=log,background="#FFFFFF", font=("Helvetica", 12))
     log_button.grid(row=2, column=0,pady=20)
 
+    print = tk.Button(homepage_frame, text="Print", command=printDetails, background="#FFFFFF",font=("Helvetica", 12))
+    print.grid(row=4, pady=10)
+
     homepage_frame.master.title("હોમપેજ")
+
+def printDetails():
+    homepage_destroyer()
+    print.printPage(homepage_frame)
 
 def homepage_destroyer():
     if homepage_frame is not None:
         homepage_frame.destroy()
 
 def logoutclicked():
+    logger.log_activity(lu.current_user,"LOG-OUT")
     homepage_destroyer()
     login.initloginpage(homepage_frame)
 

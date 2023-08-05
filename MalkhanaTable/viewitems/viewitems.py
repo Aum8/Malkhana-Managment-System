@@ -10,6 +10,7 @@ from PIL import Image, ImageTk
 import os
 import MalkhanaTable.additems.additems as ai
 import io
+import logger as lu
 
 viewitems_frame = None
 
@@ -108,10 +109,10 @@ def viewitems(prev_malkhana_frame):
     view_attachment_button.pack(pady=7)
 
     # Create a button to go back to the homepage
-    back_button = tk.Button(viewitems_frame, text="પાછા જાઓ", command=go_back, font=("Helvetica", 12))
+    back_button = tk.Button(viewitems_frame, text="પાછા જાઓ",  background="#FFFFFF",command=go_back, font=("Helvetica", 12))
     back_button.pack(pady=10)
 
-    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", command=logoutclicked, font=("Helvetica", 12))
+    logout = tk.Button(viewitems_frame, text="લૉગઆઉટ", background="#FFFFFF", command=logoutclicked, font=("Helvetica", 12))
     logout.pack(padx=12, pady=10)
 
     # Create a search entry and button
@@ -124,10 +125,10 @@ def viewitems(prev_malkhana_frame):
     search_field_menu = ttk.Combobox(viewitems_frame, textvariable=search_field_var, values=tree["columns"], state='readonly')
     search_field_menu.pack()
 
-    search_button = tk.Button(viewitems_frame, text="શોધ", command=lambda: search_items(tree, search_field_var.get(), search_var.get()), font=("Helvetica", 12))
+    search_button = tk.Button(viewitems_frame, text="શોધ", background="#FFFFFF", command=lambda: search_items(tree, search_field_var.get(), search_var.get()), font=("Helvetica", 12))
     search_button.pack()
 
-    show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", command=lambda: show_all(tree), font=("Helvetica", 12))
+    show_all_btn = tk.Button(viewitems_frame, text="બધા બતાવો", background="#FFFFFF", command=lambda: show_all(tree), font=("Helvetica", 12))
     show_all_btn.pack()
 
 
@@ -172,6 +173,8 @@ def go_home():
     homepage.open_homepage_r(viewitems_frame)
 
 def logoutclicked():
+    activity = "LOG-OUT"
+    lu.log_activity(login.current_user,activity)
     viewitems_destroyer()
     login.initloginpage(viewitems_frame)
 
