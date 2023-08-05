@@ -39,7 +39,7 @@ def open_homepage_r(return_frame):
     global homepage_frame
 
     homepage_destroyer()
-
+#
     homepage_frame = tk.Frame(return_frame.master)
     homepage_frame.pack()
 

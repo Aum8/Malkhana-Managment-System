@@ -27,7 +27,7 @@ def printPage(prev_malkhana_frame):
     Home.pack(pady=5)
 
     print_frame.mainloop()
-
+#
 def print_details(barcode=None):
     # Connect to the database and retrieve data
     try:
