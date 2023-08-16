@@ -136,7 +136,7 @@ def already_outornot(barcode,date,time,taken_by_whom,item_name,fir_no,order_no):
     conn.close()
     if result and result[0] in ("malkhana", "Malkhana"):
         update_item_status(barcode)
-        log.update_logs(barcode, "કોર્ટમાં ચેકઆઉટ કર્યું", date, time)
+        log.update_logs(barcode, "FSLમાં ચેકઆઉટ કર્યું", date, time)
         messagebox.showinfo("સફળતા", "મુદ્દામાલ સફળતાથી FSL માં મોકલ્યો છે!")
         addfslpage(barcode,date,time,taken_by_whom,item_name,fir_no,order_no)
         activity = "Item checked out to FSL barcode no:"+barcode

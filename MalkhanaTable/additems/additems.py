@@ -14,7 +14,7 @@ additems_frame = None
 def additems(prev_malkhana_frame):
     prev_malkhana_frame.destroy()
 
-    global additems_frame
+    global additems_frame, description_entry
     global barcode_entry, fir_number_entry, item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry,hour_var,minute_var,crime_witnesses_entry, crime_inspector_entry,item_status_entry,where_its_kept_entry
     additems_destroyer()
     additems_frame = tk.Frame(prev_malkhana_frame.master)
@@ -34,6 +34,7 @@ def additems(prev_malkhana_frame):
     tk.Label(additems_frame, text="અપરાધ નિરીક્ષક:",font=font_style).grid(row=8, column=0, padx=10, pady=10)
     #tk.Label(additems_frame, text="વસ્તુની સ્થિતિ:",font=font_style).grid(row=9, column=0, padx=10, pady=10)
     tk.Label(additems_frame, text="ક્યાં સંગ્રહિત છે:",font=font_style).grid(row=9, column=0, padx=10, pady=10)    
+    tk.Label(additems_frame, text="વસ્તુનું વર્ણન:",font=font_style).grid(row=10, column=0, padx=10, pady=10)    
 
     # Entry Fields
     textbox_font = ('Helvetica', 12)
@@ -52,6 +53,7 @@ def additems(prev_malkhana_frame):
     crime_inspector_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
     #item_status_entry = tk.Entry(additems_frame, font=textbox_font)
     where_its_kept_entry = tk.Entry(additems_frame, background="#FFFFFF",font=textbox_font)
+    description_entry = tk.Entry(additems_frame,background="#FFFFFF",font=textbox_font)
 
     # Place Entry Fields
     barcode_entry.grid(row=0, column=1, padx=10, pady=10)
@@ -62,6 +64,7 @@ def additems(prev_malkhana_frame):
     crime_date_entry.grid(row=5, column=1, padx=10, pady=10)
     crime_witnesses_entry.grid(row=7, column=1, padx=10, pady=10)
     crime_inspector_entry.grid(row=8, column=1, padx=10, pady=10)
+    description_entry.grid(row=10, column=1, padx=10, pady=10)
    # item_status_entry.grid(row=9, column=1, padx=10, pady=10)
     where_its_kept_entry.grid(row=9, column=1, padx=10, pady=10)
     hour_menu.grid(row=6, column=1, padx=10, pady=10)  # Place the hour drop-down menu
@@ -87,7 +90,7 @@ def additems(prev_malkhana_frame):
     
 def insert_data():
     
-    global barcode_entry,fir_number_entry,item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_witnesses_entry, crime_inspector_entry,item_status_entry,where_its_kept_entry
+    global description_entry, barcode_entry,fir_number_entry,item_name_entry, ipc_section_entry, crime_scene_entry, crime_date_entry, crime_witnesses_entry, crime_inspector_entry,item_status_entry,where_its_kept_entry
     barcode = barcode_entry.get()
     fir_number = fir_number_entry.get()
     item_name = item_name_entry.get()
@@ -98,6 +101,7 @@ def insert_data():
     crime_inspector = crime_inspector_entry.get()
     #item_status = item_status_entry.get()
     where_its_kept = where_its_kept_entry.get()
+    description_entry = description_entry.get()
     
     crime_hour = int(hour_var.get())
     crime_minute = int(minute_var.get())
@@ -134,16 +138,17 @@ def insert_data():
                             item_status TEXT,
                             where_its_kept TEXT,
                             timee TEXT,
-                            attachments BLOB
+                            attachments BLOB,
+                            item_desc TEXT
                         );''')
         timee = datetime.datetime.now()
         item_status = "malkhana"
         # Execute the SQL command to insert data into the table
         cursor.execute('''INSERT INTO items (barcode,fir_number, item_name, ipc_section, 
                           crime_scene, crime_date, crime_time, crime_witnesses, 
-                          crime_inspector,item_status,where_its_kept,timee,attachments) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)''',
+                          crime_inspector,item_status,where_its_kept,timee,attachments,item_desc) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)''',
                        (barcode,fir_number, item_name, ipc_section, crime_scene, crime_date,
-                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept,timee,image_data))
+                        crime_time, crime_witnesses, crime_inspector,item_status,where_its_kept,timee,image_data,description_entry))
         if file_path:
             save_attachment(barcode, file_path)
         # Commit the changes

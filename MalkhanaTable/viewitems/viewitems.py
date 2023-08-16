@@ -42,23 +42,24 @@ def viewitems(prev_malkhana_frame):
         "અપરાધ નિરીક્ષક",
         "વસ્તુનું અવસ્થા",
         "ક્યાં રાખી છે",
+        "વસ્તુનું વર્ણન"
        # "attachments"
     )
 
     # Format columns
     tree.column("#0", width=0, stretch=tk.NO)  # Hidden first column
-    tree.column("બારકોડ", anchor=tk.W, width=100)
+    tree.column("બારકોડ", anchor=tk.W, width=80)
     tree.column("FIR નંબર", anchor=tk.W, width=100)
     tree.column("વસ્તુનું નામ", anchor=tk.W, width=150)
     tree.column("IPC કલમ", anchor=tk.W, width=100)
     tree.column("અપરાધ સ્થળ", anchor=tk.W, width=150)
-    tree.column("અપરાધ તારીખ", anchor=tk.W, width=100)
-    tree.column("અપરાધ સમય", anchor=tk.W, width=100)
+    tree.column("અપરાધ તારીખ", anchor=tk.W, width=60)
+    tree.column("અપરાધ સમય", anchor=tk.W, width=60)
     tree.column("અપરાધ સાક્ષીઓ", anchor=tk.W, width=150)
     tree.column("અપરાધ નિરીક્ષક", anchor=tk.W, width=150)
     tree.column("વસ્તુનું અવસ્થા", anchor=tk.W, width=100)
     tree.column("ક્યાં રાખી છે", anchor=tk.W, width=150)
-   # tree.column("attachments", anchor=tk.W, width=0)
+    tree.column("વસ્તુનું વર્ણન", anchor=tk.W, width=200)
 
     # Create headings
     tree.heading("#0", text="", anchor=tk.W)
@@ -73,7 +74,7 @@ def viewitems(prev_malkhana_frame):
     tree.heading("અપરાધ નિરીક્ષક", text="અપરાધ નિરીક્ષક", anchor=tk.W)
     tree.heading("વસ્તુનું અવસ્થા", text="વસ્તુનું અવસ્થા", anchor=tk.W)
     tree.heading("ક્યાં રાખી છે", text="ક્યાં રાખી છે", anchor=tk.W)
-   # tree.heading("attachments", text="attachment_path", anchor=tk.W)
+    tree.heading("વસ્તુનું વર્ણન", text="વસ્તુનું વર્ણન", anchor=tk.W)
 
     # Add data to the treeview from the database
     try:
@@ -84,7 +85,7 @@ def viewitems(prev_malkhana_frame):
         cursor = conn.cursor()
 
         # Execute the SQL command to select all rows from the table
-        cursor.execute('''SELECT barcode, fir_number, item_name, ipc_section, crime_scene, crime_date, crime_time, crime_witnesses, crime_inspector, item_status, where_its_kept
+        cursor.execute('''SELECT barcode, fir_number, item_name, ipc_section, crime_scene, crime_date, crime_time, crime_witnesses, crime_inspector, item_status, where_its_kept,item_desc
  FROM items ORDER BY timee DESC''')
 
         # Fetch all the rows and insert them into the treeview
@@ -238,7 +239,8 @@ def convert_to_english(column_name_gujarati):
         "અપરાધ સાક્ષીઓ": "crime_witnesses",
         "અપરાધ નિરીક્ષક": "crime_inspector",
         "વસ્તુનું અવસ્થા": "item_status",
-        "ક્યાં રાખી છે": "where_its_kept"
+        "ક્યાં રાખી છે": "where_its_kept",
+        "વસ્તુનું વર્ણન":"item_desc"
     }
 
     return gujarati_to_english.get(column_name_gujarati, column_name_gujarati)

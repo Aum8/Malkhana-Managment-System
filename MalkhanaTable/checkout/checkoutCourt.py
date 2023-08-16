@@ -51,7 +51,7 @@ def checkouttocourt_page(root):
     # Labels
     label_barcode = ttk.Label(checkout_frame, background="#B9E6FF", text="બારકોડ:", font=("Helvetica", 12))
     label_fir_no = ttk.Label(checkout_frame, background="#B9E6FF", text="FIR નંબર:", font=("Helvetica", 12))
-    label_item_name = ttk.Label(checkout_frame, background="#B9E6FF", text="વસ્ત્રનું નામ:", font=("Helvetica", 12))
+    label_item_name = ttk.Label(checkout_frame, background="#B9E6FF", text="વસ્તુનું નામ:", font=("Helvetica", 12))
     label_taken_by_whom = ttk.Label(checkout_frame,  background="#B9E6FF",text="લઈ જનાર ઓફિસર :", font=("Helvetica", 12))
     label_checkout_date = ttk.Label(checkout_frame, background="#B9E6FF", text="ચેકઆઉટ તારીખ:", font=("Helvetica", 12))
     label_checkout_time = ttk.Label(checkout_frame, background="#B9E6FF", text="ચેકઆઉટ સમય:", font=("Helvetica", 12))
